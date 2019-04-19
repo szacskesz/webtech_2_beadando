@@ -11,13 +11,13 @@ routes.get("/getAllOrders", (req, resp) => {
     });
 })
 
-routes.get("/getAllOrdersByUsername/:username", (req, resp) => {
-    if(req.params.username == undefined) {
+routes.post("/getAllOrdersByUsername", (req, resp) => {
+    if(req.body["username"] == undefined) {
         resp.status(400).send("username must be defined");
         return;
     }
 
-    orderService.getAllOrdersByUsername(req.params.username, (orders) => {
+    orderService.getAllOrdersByUsername(req.body["username"], (orders) => {
         resp.status(200).send(orders);
     }, (error) => {
         resp.status(400).send(error);

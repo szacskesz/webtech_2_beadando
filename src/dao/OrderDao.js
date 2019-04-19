@@ -37,9 +37,7 @@ function getAllOrdersByUsername(username, successCallback, errorCallback) {
   
             collection.find(
                 {
-                    "costumer_data": {
-                        "name": username
-                    }
+                    "costumer_data.name": username
                 }
             ).toArray((err, orders) => {
                 assert.equal(err, null);
