@@ -8,7 +8,7 @@ const collectionName = 'orders'             // Collection name
 function getAllOrders(successCallback, errorCallback) {
     try {
         var client = new MongoClient(url);
-        client.connect((err)=>{
+        client.connect((err) => {
             assert.equal(null, err);
     
             const db = client.db(dbName);
@@ -31,7 +31,7 @@ function getAllOrders(successCallback, errorCallback) {
 function getAllOrdersByUsername(username, successCallback, errorCallback) {
     try {
         var client = new MongoClient(url);
-        client.connect((err)=>{
+        client.connect((err) => {
             assert.equal(null, err);
     
             const db = client.db(dbName);
@@ -60,7 +60,7 @@ function getAllOrdersByUsername(username, successCallback, errorCallback) {
 function createOrder(order, successCallback, errorCallback) {
     try {
         var client = new MongoClient(url);
-        client.connect((err)=>{
+        client.connect((err) => {
             assert.equal(null, err);
     
             const db = client.db(dbName);
@@ -84,7 +84,7 @@ function createOrder(order, successCallback, errorCallback) {
 function finishShutter(orderId, shutterId, successCallback, errorCallback) {
     try {
         var client = new MongoClient(url);
-        client.connect((err)=>{
+        client.connect((err) => {
             assert.equal(null, err);
     
             const db = client.db(dbName);
@@ -123,7 +123,7 @@ function finishShutter(orderId, shutterId, successCallback, errorCallback) {
 function createInvoiceForOrder(orderId, invoice, successCallback, errorCallback) {
     try {
         var client = new MongoClient(url);
-        client.connect((err)=>{
+        client.connect((err) => {
             assert.equal(null, err);
     
             const db = client.db(dbName);

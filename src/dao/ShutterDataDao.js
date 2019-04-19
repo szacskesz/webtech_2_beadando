@@ -10,7 +10,7 @@ function getAllShutterColors(successCallback, errorCallback) {
         const collectionName = 'shutter_colors'       // Collection name
 
         var client = new MongoClient(url);
-        client.connect((err)=>{
+        client.connect((err) => {
             assert.equal(null, err);
     
             const db = client.db(dbName);
@@ -35,7 +35,7 @@ function getAllShutterMaterials(successCallback, errorCallback) {
         const collectionName = 'shutter_materials'       // Collection name
 
         var client = new MongoClient(url);
-        client.connect((err)=>{
+        client.connect((err) => {
             assert.equal(null, err);
     
             const db = client.db(dbName);
@@ -60,7 +60,7 @@ function getAllShutterTypes(successCallback, errorCallback) {
         const collectionName = 'shutter_types'       // Collection name
 
         var client = new MongoClient(url);
-        client.connect((err)=>{
+        client.connect((err) => {
             assert.equal(null, err);
     
             const db = client.db(dbName);
