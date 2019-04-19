@@ -22,8 +22,6 @@ function getAllOrders(successCallback, errorCallback) {
             });
         })
     } catch (error) {
-        //TODO delete console log
-        console.log(error)
         errorCallback(error);
     }
 }
@@ -51,8 +49,6 @@ function getAllOrdersByUsername(username, successCallback, errorCallback) {
             });
         })
     } catch (error) {
-        //TODO delete console log
-        console.log(error)
         errorCallback(error);
     }
 }
@@ -75,8 +71,6 @@ function createOrder(order, successCallback, errorCallback) {
             })
         })
     } catch (error) {
-        //TODO delete console log
-        console.log(error)
         errorCallback(error);
     }
 }
@@ -114,8 +108,6 @@ function finishShutter(orderId, shutterId, successCallback, errorCallback) {
             )
         })
     } catch (error) {
-        //TODO delete console log
-        console.log(error)
         errorCallback(error);
     } 
 }
@@ -149,8 +141,6 @@ function createInvoiceForOrder(orderId, invoice, successCallback, errorCallback)
             )
         })
     } catch (error) {
-        //TODO delete console log
-        console.log(error)
         errorCallback(error);
     }
 }

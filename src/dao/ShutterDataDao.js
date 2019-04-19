@@ -22,8 +22,6 @@ function getAllShutterColors(successCallback, errorCallback) {
             });
         })
     } catch (error) {
-        //TODO delete console log
-        console.log(error)
         errorCallback(error);
     }
 }
@@ -46,8 +44,6 @@ function getAllShutterMaterials(successCallback, errorCallback) {
             });
         })
     } catch (error) {
-        //TODO delete console log
-        console.log(error)
         errorCallback(error);
     }
 }
@@ -70,8 +66,6 @@ function getAllShutterTypes(successCallback, errorCallback) {
             });
         })
     } catch (error) {
-        //TODO delete console log
-        console.log(error)
         errorCallback(error);
     }
 }

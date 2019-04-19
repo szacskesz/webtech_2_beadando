@@ -40,7 +40,7 @@ routes.post("/createOrder", (req, resp) => {
     });
 })
 
-routes.post("/finishShutter/", (req, resp) => {
+routes.post("/finishShutter", (req, resp) => {
     if(req.body["orderId"] == undefined) {
         resp.status(400).send("orderId must be defined");
         return;
