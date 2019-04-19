@@ -1,0 +1,43 @@
+use wetbech2_assignment
+
+db.shutter_colors.insertMany([
+    {
+      color: "red"
+    },
+    {
+      color: "green"
+    },
+    {
+      color: "blue"
+    },
+    {
+      color: "yellow"
+    },
+    {
+      color: "white"
+    },
+    {
+      color: "black"
+    }
+])
+
+db.shutter_materials.insertMany([
+    {
+      material: "wood"
+    },
+    {
+      material: "metal"
+    },
+    {
+      material: "plastic"
+    }
+])
+
+db.shutter_types.insertMany([
+    {
+      type: "basic"
+    },
+    {
+      type: "with bug-screen"
+    }
+])
