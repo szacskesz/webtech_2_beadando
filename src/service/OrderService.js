@@ -17,7 +17,7 @@ OrderService.prototype.getAllOrders = function(successCallback, errorCallback){
         logger.info(`getAllOrders: ${orders.length} orders were found!`)
         successCallback(orders)
     }, (error) => {
-        logger.info("Error in getAllOrders, cause: " + error)
+        logger.error("Error in getAllOrders, cause: " + error)
         errorCallback(error)
     })
 }
@@ -27,7 +27,7 @@ OrderService.prototype.getAllOrdersByUsername = function(username, successCallba
         logger.info(`getAllOrdersByUsername: ${orders.length} orders were found!`)
         successCallback(orders)
     }, (error) => {
-        logger.info("Error in getAllOrdersByUsername, cause: " + error)
+        logger.error("Error in getAllOrdersByUsername, cause: " + error)
         errorCallback(error)
     })
 }
@@ -38,7 +38,7 @@ OrderService.prototype.createOrder = function(order, successCallback, successCal
         logger.info("createOrder: Order successfully created")
         successCallback()
     }, (error) => {
-        logger.info("Error in createOrder, cause: " + error)
+        logger.error("Error in createOrder, cause: " + error)
         errorCallback(error)
     })
 }
@@ -48,7 +48,7 @@ OrderService.prototype.finishShutter = function(orderId, shutterId, successCallb
         logger.info("finishShutter: Order successfully finished")
         successCallback()
     }, (error) => {
-        logger.info("Error in finishShutter, cause: " + error)
+        logger.error("Error in finishShutter, cause: " + error)
         errorCallback(error)
     })
 }
@@ -59,7 +59,7 @@ OrderService.prototype.createInvoiceForOrder = function(orderId, invoice, succes
         logger.info("createInvoiceForOrder: invoice succesfully created on order")
         successCallback()
     }, (error) => {
-        logger.info("Error in createInvoiceForOrder, cause: " + error)
+        logger.error("Error in createInvoiceForOrder, cause: " + error)
         errorCallback(error)
     })
 }
