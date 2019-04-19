@@ -1,0 +1,22 @@
+{
+    "name": "ea5",
+    "version": "0.0.1",
+    "dependencies": {
+        "express": "4.16.4",
+        "body-parser": "1.18.3",
+        "mongodb": "3.1.13",
+        "assert": "1.4.1",
+        "mocha": "6.0.2",
+        "crypto": "1.0.1",
+        "font-awesome": "4.7.0",
+        "winston": "3.2.1"
+    },
+    "scripts": {
+        "build-css": "node-sass --include-path scss src/scss/style.scss public/css/style.css",
+        "start": "npm run build-css && node main.js",
+        "test": "mocha --timeout 20000"
+    },
+    "devDependencies": {
+        "node-sass": "^4.11.0"
+    }
+}
