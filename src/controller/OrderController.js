@@ -28,6 +28,8 @@ routes.post("/createOrder", (req, resp) => {
 
     //TODO CHECKS
 
+    //TODO return id
+
     //TODO create data
     let order = {
         
