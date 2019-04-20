@@ -10,14 +10,14 @@ function getAllOrders(successCallback, errorCallback) {
         var client = new MongoClient(url, { useNewUrlParser: true });
         client.connect((err) => {
             try {
-                assert.equal(null, err);
+                assert.equal(null, err, err);
         
                 const db = client.db(dbName);
                 const collection= db.collection(collectionName)
         
                 collection.find().toArray((err, orders) => {
                     try {
-                        assert.equal(err, null);
+                        assert.equal(null, err, err);
 
                         client.close();
                         successCallback(orders)
@@ -39,7 +39,7 @@ function getAllOrdersByUsername(username, successCallback, errorCallback) {
         var client = new MongoClient(url, { useNewUrlParser: true });
         client.connect((err) => {
             try {
-                assert.equal(null, err);
+                assert.equal(null, err, err);
         
                 const db = client.db(dbName);
                 const collection= db.collection(collectionName)
@@ -50,7 +50,7 @@ function getAllOrdersByUsername(username, successCallback, errorCallback) {
                     }
                 ).toArray((err, orders) => {
                     try {
-                        assert.equal(err, null);
+                        assert.equal(null, err, err);
 
                         client.close();
                         successCallback(orders)
@@ -72,15 +72,15 @@ function createOrder(order, successCallback, errorCallback) {
         var client = new MongoClient(url, { useNewUrlParser: true });
         client.connect((err) => {
             try {
-                assert.equal(null, err);
+                assert.equal(null, err, err);
         
                 const db = client.db(dbName);
                 const collection= db.collection(collectionName)
 
                 collection.insertOne(order, (err,response) => {
                     try {
-                        assert.equal(null, err);
-                        assert.equal(1, response.insertedCount);
+                        assert.equal(null, err, err);
+                        assert.equal(1, response.insertedCount, "Could not insert order");
 
                         client.close();
                         successCallback()
@@ -102,7 +102,7 @@ function finishShutter(orderId, shutterId, successCallback, errorCallback) {
         var client = new MongoClient(url, { useNewUrlParser: true });
         client.connect((err) => {
             try {
-                assert.equal(null, err);
+                assert.equal(null, err, err);
         
                 const db = client.db(dbName);
                 const collection= db.collection(collectionName)
@@ -123,7 +123,9 @@ function finishShutter(orderId, shutterId, successCallback, errorCallback) {
                     },
                     (err, response) => {
                         try {
-                            assert.equal(null, err);
+                            assert.equal(null, err, err);
+                            assert.equal(1, response.matchedCount, "Could not find order");
+                            assert.equal(1, response.modifiedCount, "Could not update order");
 
                             client.close();
                             successCallback()
@@ -146,12 +148,12 @@ function createInvoiceForOrder(orderId, invoice, successCallback, errorCallback)
         var client = new MongoClient(url, { useNewUrlParser: true });
         client.connect((err) => {
             try {
-                assert.equal(null, err);
+                assert.equal(null, err, err);
         
                 const db = client.db(dbName);
                 const collection= db.collection(collectionName)
 
-                collection.update(
+                collection.updateOne(
                     {
                         "id": orderId
                     },
@@ -163,8 +165,9 @@ function createInvoiceForOrder(orderId, invoice, successCallback, errorCallback)
                     },
                     (err, response) => {
                         try {
-                            assert.equal(null, err);
-                            assert.equal(1, response.insertedCount);
+                            assert.equal(null, err, err);
+                            assert.equal(1, response.matchedCount, "Could not find order");
+                            assert.equal(1, response.modifiedCount, "Could not update order");
 
                             client.close();
                             successCallback()

@@ -10,14 +10,14 @@ function getAllShutterColors(successCallback, errorCallback) {
         var client = new MongoClient(url, { useNewUrlParser: true });
         client.connect((err) => {
             try {
-                assert.equal(null, err);
+                assert.equal(null, err, err);
         
                 const db = client.db(dbName);
                 const collection= db.collection(collectionName)
         
                 collection.find().toArray((err, colors) => {
                     try {
-                        assert.equal(err, null);
+                        assert.equal(null, err, err);
 
                         client.close();
                         successCallback(colors)
@@ -40,14 +40,14 @@ function getAllShutterMaterials(successCallback, errorCallback) {
         var client = new MongoClient(url, { useNewUrlParser: true });
         client.connect((err) => {
             try {
-                assert.equal(null, err);
+                assert.equal(null, err, err);
         
                 const db = client.db(dbName);
                 const collection= db.collection(collectionName)
         
                 collection.find().toArray((err, materials) => {
                     try {
-                        assert.equal(err, null);
+                        assert.equal(null, err, err);
 
                         client.close();
                         successCallback(materials)
@@ -70,14 +70,14 @@ function getAllShutterTypes(successCallback, errorCallback) {
         var client = new MongoClient(url, { useNewUrlParser: true });
         client.connect((err) => {
             try {
-                assert.equal(null, err);
+                assert.equal(null, err, err);
         
                 const db = client.db(dbName);
                 const collection= db.collection(collectionName)
         
                 collection.find().toArray((err, types) => {
                     try {
-                        assert.equal(err, null);
+                        assert.equal(null, err, err);
 
                         client.close();
                         successCallback(types)
