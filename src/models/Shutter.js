@@ -1,5 +1,12 @@
-function Shutter(color, material, type, isFinished) {
+var counter = (function(){
+    var cnt = 0;
+    return function(){
+        cnt++;
+        return cnt;
+    }
+})();
 
+function Shutter(color, material, type, isFinished) {
     if(color === undefined) {
         throw "Error(Shutter): color cannot be undefined";
     }
@@ -26,12 +33,22 @@ function Shutter(color, material, type, isFinished) {
         throw "Error(Shutter): isFinished must be a boolean";
     }
 
-    this.color =  color; //get all (piros zöld kék, sárga, )
-    this.material = material; //get all materials (fa, műanyag, acél)
-    this.type = type; //get all types (egyszerű, szúnyoghálós)
+    this.id = counter();
+    this.color =  color;
+    this.material = material;
+    this.type = type;
     this.isFinished = isFinished
 }
 
+function ShutterFromJson(shutter) {
+    if(shutter === undefined) {
+        throw "Error(Shutter): shutter cannot be undefined";
+    }
+
+    return new Shutter(shutter.color, shutter.material, shutter.type, shutter.isFinished);
+}
+
 module.exports = {
-    Shutter: Shutter
+    Shutter: Shutter,
+    ShutterFromJson: ShutterFromJson
 };

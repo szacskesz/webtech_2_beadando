@@ -1,38 +1,38 @@
-const emailRegexp = new RegExp('/\S+@\S+\.\S+/','i');
+const emailRegexp = new RegExp('\\S+@\\S+\\.\\S+','i');
 
-function CostumerData(name, email, address) {
+function CustomerData(name, email, address) {
     if(name === undefined) {
-        throw "Error(CostumerData): name cannot be undefined";
+        throw "Error(CustomerData): name cannot be undefined";
     }
     if(email === undefined) {
-        throw "Error(CostumerData): email cannot be undefined";
+        throw "Error(CustomerData): email cannot be undefined";
     }
     if(address === undefined) {
-        throw "Error(CostumerData): address cannot be undefined";
+        throw "Error(CustomerData): address cannot be undefined";
     }
 
     if(typeof name !== 'string') {
-        throw "Error(CostumerData): name must be a string";
+        throw "Error(CustomerData): name must be a string";
     }
     if(typeof email !== 'string') {
-        throw "Error(CostumerData): email must be a string";
+        throw "Error(CustomerData): email must be a string";
     }
     if(typeof address !== 'string') {
-        throw "Error(CostumerData): address must be a string";
+        throw "Error(CustomerData): address must be a string";
     }
 
     if(name === "") {
-        throw "Error(CostumerData): name cannot be empty string";
+        throw "Error(CustomerData): name cannot be empty string";
     }
     if(email === "") {
-        throw "Error(CostumerData): email cannot be empty string";
+        throw "Error(CustomerData): email cannot be empty string";
     }
     if(address === "") {
-        throw "Error(CostumerData): address cannot be empty string";
+        throw "Error(CustomerData): address cannot be empty string";
     }
 
-    if(emailRegexp.test(email)) {
-        throw "Error(CostumerData): email must be a valid email address";
+    if(!emailRegexp.test(email)) {
+        throw "Error(CustomerData): email must be a valid email address";
     }
 
     this.name =  name;
@@ -40,6 +40,15 @@ function CostumerData(name, email, address) {
     this.address = address;
 }
 
+function CustomerDataFromJson(customerData) {
+    if(customerData === undefined) {
+        throw "Error(CustomerData): customerData cannot be undefined";
+    }
+
+    return new CustomerData(customerData.name, customerData.email, customerData.address);
+}
+
 module.exports = {
-    CostumerData: CostumerData
+    CustomerData: CustomerData,
+    CustomerDataFromJson: CustomerDataFromJson
 };

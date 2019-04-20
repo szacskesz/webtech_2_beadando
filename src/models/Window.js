@@ -1,3 +1,5 @@
+var ShutterClass = require("./Shutter");
+
 function Window(width, height, shutter) {
     if(width === undefined) {
         throw "Error(Window): width cannot be undefined";
@@ -15,10 +17,6 @@ function Window(width, height, shutter) {
     if(typeof height !== 'number') {
         throw "Error(Window): height must be a number";
     }
-    //TODO
-    // if(shutter instanceof Shutter) { 
-    //     throw "Error(Window): address must be a string";
-    // }
 
     if(width <= 0) {
         throw "Error(Window): width must be a positive number";
@@ -28,11 +26,20 @@ function Window(width, height, shutter) {
         throw "Error(Window): height must be a positive number";
     }
 
-    this.width =  width; //must
-    this.height =  height; //must
-    this.shutter = shutter; //must be present
+    this.width =  width;
+    this.height =  height;
+    this.shutter = new ShutterClass.ShutterFromJson(shutter);;
+}
+
+function WindowFromJson(window) {
+    if(window === undefined) {
+        throw "Error(Window): window cannot be undefined";
+    }
+
+    return new Window(window.width, window.height, window.shutter);
 }
 
 module.exports = {
-    Window: Window
+    Window: Window,
+    WindowFromJson: WindowFromJson
 };
