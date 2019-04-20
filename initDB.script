@@ -118,8 +118,8 @@ db.orders.insertMany([
 
     {
         customerData:  {
-	        name: "Kis Pál2",
-	        email: "kispal2@mail.com",
+	        name: "Kis János",
+	        email: "kisjanos@mail.com",
 	        address: "3525 Msikolc Hősök tere 2."
         },
         comment: "No comment",
