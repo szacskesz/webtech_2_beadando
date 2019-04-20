@@ -24,10 +24,10 @@ function Shutter(color, material, type, isFinished) {
         throw "Error(Shutter): color must be a string";
     }
     if(typeof material !== 'string') {
-        throw "Error(Shutter): material must be string";
+        throw "Error(Shutter): material must be a string";
     }
     if(typeof type !== 'string') {
-        throw "Error(Shutter): type must be string";
+        throw "Error(Shutter): type must be a string";
     }
     if(typeof isFinished !== 'boolean') {
         throw "Error(Shutter): isFinished must be a boolean";
