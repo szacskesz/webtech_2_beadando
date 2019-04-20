@@ -1,97 +1,50 @@
-const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
-const url = 'mongodb://localhost:27017';    // Connection URL
-const dbName = 'wetbech2_assignment';       // Database name
+const getDatabaseConnection = require('../database/DatabaseConnection').getDatabaseConnection;
 
-function getAllShutterColors(successCallback, errorCallback) {
-    try {
-        const collectionName = 'shutter_colors'       // Collection name
-        var client = new MongoClient(url, { useNewUrlParser: true });
-        client.connect((err) => {
-            try {
-                assert.equal(null, err, err);
-        
-                const db = client.db(dbName);
-                const collection= db.collection(collectionName)
-        
-                collection.find().toArray((err, colors) => {
-                    try {
-                        assert.equal(null, err, err);
+async function getAllShutterColors(successCallback, errorCallback) {
+    const db = await getDatabaseConnection();
+    const collection= db.collection("shutter_colors")
 
-                        client.close();
-                        successCallback(colors)
-                    } catch (error) {
-                        errorCallback("" + error);
-                    }
-                });
-            } catch (error) {
-                errorCallback("" + error);
-            }
-        })
-    } catch (error) {
-        errorCallback("" + error);
-    }
+    collection.find().toArray((err, colors) => {
+        try {
+            assert.equal(null, err, err);
+
+            successCallback(colors)
+        } catch (error) {
+            errorCallback("" + error);
+        }
+    });
 }
 
-function getAllShutterMaterials(successCallback, errorCallback) {
-    try {
-        const collectionName = 'shutter_materials'       // Collection name
-        var client = new MongoClient(url, { useNewUrlParser: true });
-        client.connect((err) => {
-            try {
-                assert.equal(null, err, err);
-        
-                const db = client.db(dbName);
-                const collection= db.collection(collectionName)
-        
-                collection.find().toArray((err, materials) => {
-                    try {
-                        assert.equal(null, err, err);
+async function getAllShutterMaterials(successCallback, errorCallback) {
+    const db = await getDatabaseConnection();
+    const collection= db.collection("shutter_materials")
 
-                        client.close();
-                        successCallback(materials)
-                    } catch (error) {
-                        errorCallback("" + error);
-                    }
-                });
-            } catch (error) {
-                errorCallback("" + error);
-            }
-        })
-    } catch (error) {
-        errorCallback("" + error);
-    }
+    collection.find().toArray((err, materials) => {
+        try {
+            assert.equal(null, err, err);
+
+            successCallback(materials)
+        } catch (error) {
+            errorCallback("" + error);
+        }
+    });
 }
 
-function getAllShutterTypes(successCallback, errorCallback) {
-    try {
-        const collectionName = 'shutter_types'       // Collection name
-        var client = new MongoClient(url, { useNewUrlParser: true });
-        client.connect((err) => {
-            try {
-                assert.equal(null, err, err);
-        
-                const db = client.db(dbName);
-                const collection= db.collection(collectionName)
-        
-                collection.find().toArray((err, types) => {
-                    try {
-                        assert.equal(null, err, err);
+async function getAllShutterTypes(successCallback, errorCallback) {
+    const db = await getDatabaseConnection();
+    const collection= db.collection("shutter_types")
 
-                        client.close();
-                        successCallback(types)
-                    } catch (error) {
-                        errorCallback("" + error);
-                    }
-                });
-            } catch (error) {
-                errorCallback("" + error);
-            }
-        })
-    } catch (error) {
-        errorCallback("" + error);
-    }
+    collection.find().toArray((err, types) => {
+        try {
+            assert.equal(null, err, err);
+
+            successCallback(types)
+        } catch (error) {
+            errorCallback("" + error);
+        }
+    });
 }
 
 module.exports = {
