@@ -23,15 +23,15 @@ function getAllOrders(successCallback, errorCallback) {
                         client.close();
                         successCallback(orders)
                     } catch (error) {
-                        errorCallback(error);
+                        errorCallback("" + error);
                     }
                 });
             } catch (error) {
-                errorCallback(error);
+                errorCallback("" + error);
             }
         })
     } catch (error) {
-        errorCallback(error);
+        errorCallback("" + error);
     }
 }
 
@@ -56,15 +56,15 @@ function getAllOrdersByUsername(username, successCallback, errorCallback) {
                         client.close();
                         successCallback(orders)
                     } catch (error) {
-                        errorCallback(error);
+                        errorCallback("" + error);
                     }
                 });
             } catch (error) {
-                errorCallback(error);
+                errorCallback("" + error);
             }
         })
     } catch (error) {
-        errorCallback(error);
+        errorCallback("" + error);
     }
 }
 
@@ -89,16 +89,16 @@ function getOrderById(orderId, successCallback, errorCallback) {
                             client.close();
                             successCallback(order)
                         } catch (error) {
-                            errorCallback(error);
+                            errorCallback("" + error);
                         }
                     }
                 );
             } catch (error) {
-                errorCallback(error);
+                errorCallback("" + error);
             }
         })
     } catch (error) {
-        errorCallback(error);
+        errorCallback("" + error);
     }
 }
 
@@ -120,15 +120,15 @@ function createOrder(order, successCallback, errorCallback) {
                         client.close();
                         successCallback(response.insertedId)
                     } catch (error) {
-                        errorCallback(error);
+                        errorCallback("" + error);
                     }
                 })
             } catch (error) {
-                errorCallback(error);
+                errorCallback("" + error);
             }
         })
     } catch (error) {
-        errorCallback(error);
+        errorCallback("" + error);
     }
 }
 
@@ -156,22 +156,21 @@ function finishShutter(orderId, shutterId, successCallback, errorCallback) {
                         try {
                             assert.equal(null, err, err);
                             assert.equal(1, response.matchedCount, "Could not find order");
-                            assert.equal(1, response.modifiedCount, "Could not update order");
+                            assert.equal(1, response.modifiedCount, "Could not update order (maybe already updated?)");
 
                             client.close();
                             successCallback()
                         } catch (error) {
-                            console.log(error);
-                            errorCallback(error);
+                            errorCallback("" + error);
                         }
                     }
                 )
             } catch (error) {
-                errorCallback(error);
+                errorCallback("" + error);
             }
         })
     } catch (error) {
-        errorCallback(error);
+        errorCallback("" + error);
     } 
 }
 
@@ -198,21 +197,21 @@ function createInvoiceForOrder(orderId, invoice, successCallback, errorCallback)
                         try {
                             assert.equal(null, err, err);
                             assert.equal(1, response.matchedCount, "Could not find order");
-                            assert.equal(1, response.modifiedCount, "Could not update order");
+                            assert.equal(1, response.modifiedCount, "Could not update order (maybe already updated?)");
 
                             client.close();
                             successCallback()
                         } catch (error) {
-                            errorCallback(error);
+                            errorCallback("" + error);
                         }
                     }
                 )
             } catch (error) {
-                errorCallback(error);
+                errorCallback("" + error);
             }
         })
     } catch (error) {
-        errorCallback(error);
+        errorCallback("" + error);
     }
 }
 

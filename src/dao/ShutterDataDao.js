@@ -22,15 +22,15 @@ function getAllShutterColors(successCallback, errorCallback) {
                         client.close();
                         successCallback(colors)
                     } catch (error) {
-                        errorCallback(error);
+                        errorCallback("" + error);
                     }
                 });
             } catch (error) {
-                errorCallback(error);
+                errorCallback("" + error);
             }
         })
     } catch (error) {
-        errorCallback(error);
+        errorCallback("" + error);
     }
 }
 
@@ -52,15 +52,15 @@ function getAllShutterMaterials(successCallback, errorCallback) {
                         client.close();
                         successCallback(materials)
                     } catch (error) {
-                        errorCallback(error);
+                        errorCallback("" + error);
                     }
                 });
             } catch (error) {
-                errorCallback(error);
+                errorCallback("" + error);
             }
         })
     } catch (error) {
-        errorCallback(error);
+        errorCallback("" + error);
     }
 }
 
@@ -82,15 +82,15 @@ function getAllShutterTypes(successCallback, errorCallback) {
                         client.close();
                         successCallback(types)
                     } catch (error) {
-                        errorCallback(error);
+                        errorCallback("" + error);
                     }
                 });
             } catch (error) {
-                errorCallback(error);
+                errorCallback("" + error);
             }
         })
     } catch (error) {
-        errorCallback(error);
+        errorCallback("" + error);
     }
 }
 
