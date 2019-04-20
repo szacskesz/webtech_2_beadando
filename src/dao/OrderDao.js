@@ -84,7 +84,7 @@ function createOrder(order, successCallback, errorCallback) {
                         assert.equal(1, response.insertedCount, "Could not insert order");
 
                         client.close();
-                        successCallback()
+                        successCallback(response.insertedId)
                     } catch (error) {
                         errorCallback(error);
                     }
@@ -127,6 +127,7 @@ function finishShutter(orderId, shutterId, successCallback, errorCallback) {
                             client.close();
                             successCallback()
                         } catch (error) {
+                            console.log(error);
                             errorCallback(error);
                         }
                     }
