@@ -15,7 +15,7 @@ const getDatabaseConnection = async () => {
             );
 
             databaseConnection = client.db(dbName);
-            console.log(`Connected to database succesfully`)
+            console.log(`Connected to database successfully`)
         } catch (error) {
             console.error(`Failed to connect ${error.stack}`)
         }
