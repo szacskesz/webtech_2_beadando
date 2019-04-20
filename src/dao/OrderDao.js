@@ -1,4 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
+const ObjectID = require('mongodb').ObjectID;
 const assert = require('assert');
 
 const url = 'mongodb://localhost:27017';    // Connection URL
@@ -46,7 +47,7 @@ function getAllOrdersByUsername(username, successCallback, errorCallback) {
     
                 collection.find(
                     {
-                        "costumer_data.name": username
+                        "customerData.name": username
                     }
                 ).toArray((err, orders) => {
                     try {
@@ -109,7 +110,7 @@ function finishShutter(orderId, shutterId, successCallback, errorCallback) {
 
                 collection.updateOne(
                     {
-                        "id": orderId,
+                        "_id": ObjectID(orderId),
                         "windows.shutter.id": shutterId
                     },
                     {
@@ -151,7 +152,7 @@ function createInvoiceForOrder(orderId, invoice, successCallback, errorCallback)
 
                 collection.updateOne(
                     {
-                        "id": orderId
+                        "_id": ObjectID(orderId)
                     },
                     {
                         $set: {
