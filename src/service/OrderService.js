@@ -45,7 +45,7 @@ OrderService.prototype.createOrder = function(order, successCallback, successCal
 
 OrderService.prototype.finishShutter = function(orderId, shutterId, successCallback, errorCallback){
     this.orderDao.finishShutter(orderId, shutterId, () => {
-        logger.info("finishShutter: Order successfully finished")
+        logger.info("finishShutter: Shutter successfully finished")
         successCallback()
     }, (error) => {
         logger.error("Error in finishShutter, cause: " + error)

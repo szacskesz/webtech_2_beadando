@@ -50,7 +50,7 @@ routes.post("/finishShutter", (req, resp) => {
         return;
     }
 
-    orderService.finishOrder(req.body["orderId"], req.body["shutterId"], () => {
+    orderService.finishShutter(req.body["orderId"], req.body["shutterId"], () => {
         resp.status(200).send();
     }, (error) => {
         resp.status(400).send(error);
