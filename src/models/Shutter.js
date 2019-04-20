@@ -33,6 +33,16 @@ function Shutter(color, material, type, isFinished) {
         throw "Error(Shutter): isFinished must be a boolean";
     }
 
+    if(color === "") {
+        throw "Error(Shutter): color cannot be empty string";
+    }
+    if(material === "") {
+        throw "Error(Shutter): material cannot be empty string";
+    }
+    if(type === "") {
+        throw "Error(Shutter): type cannot be empty string";
+    }
+
     this.id = counter();
     this.color =  color;
     this.material = material;
