@@ -21,6 +21,15 @@ function Invoice(price, isPaid) {
 	this.isPaid = isPaid;
 }
 
+function InvoiceFromJson(invoice) {
+    if(invoice === undefined) {
+        throw "Error(Invoice): invoice cannot be undefined";
+    }
+
+    return new Invoice(invoice.price, invoice.isPaid);
+}
+
 module.exports = {
-    Invoice: Invoice
+    Invoice: Invoice,
+    InvoiceFromJson: InvoiceFromJson
 };

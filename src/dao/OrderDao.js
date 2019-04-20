@@ -107,14 +107,10 @@ function finishShutter(orderId, shutterId, successCallback, errorCallback) {
                 const db = client.db(dbName);
                 const collection= db.collection(collectionName)
 
-                collection.update(
+                collection.updateOne(
                     {
                         "id": orderId,
-                        "windows": [{
-                            "shutter": {
-                                "id": shutterId
-                            }
-                        }]
+                        "windows.shutter.id": shutterId
                     },
                     {
                         $set: {
@@ -159,7 +155,6 @@ function createInvoiceForOrder(orderId, invoice, successCallback, errorCallback)
                     },
                     {
                         $set: {
-                            //TODO json stringify?
                             "invoice": invoice
                         }
                     },

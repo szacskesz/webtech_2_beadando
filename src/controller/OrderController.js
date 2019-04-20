@@ -2,6 +2,7 @@ const routes = require("express").Router();
 
 var OrderService = require("../service/OrderService");
 const orderService = new OrderService();
+var InvoiceClass = require("../models/Invoice");
 
 routes.get("/getAllOrders", (req, resp) => {
     orderService.getAllOrders((orders) => {
@@ -61,16 +62,25 @@ routes.post("/finishShutter", (req, resp) => {
 
 routes.post("/createInvoiceForOrder/:orderId", (req, resp) => {
     if(req.params.orderId == undefined) {
-        resp.status(400).send("orderId must be defined");
+        resp.status(400).send("orderId must be defined in the path");
         return;
     }
 
-    if(req.body["invoice"] == undefined) {
-        resp.status(400).send("invoice must be defined");
+    let orderId = Number(req.params.orderId)
+    if(isNaN(orderId)) {
+        resp.status(400).send("orderId must be a number");
         return;
     }
 
-    orderService.createInvoiceForOrder(req.params.orderId, req.body["invoice"], () => {
+    let invoice;
+    try {
+        invoice = new InvoiceClass.InvoiceFromJson(req.body["invoice"]);
+    } catch (error) {
+        resp.status(400).send("" + error);
+        return;
+    }
+
+    orderService.createInvoiceForOrder(orderId, invoice, () => {
         resp.status(200).send();
     }, (error) => {
         resp.status(400).send(error);
