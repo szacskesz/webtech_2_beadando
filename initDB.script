@@ -45,8 +45,7 @@ db.shutter_types.insertMany([
 db.orders.insertMany([
 
     {
-        id: 1,
-        costumer_data:  {
+        customerData:  {
 	        name: "Kis Pál",
 	        email: "kispal@mail.com",
 	        address: "3525 Msikolc Hősök tere 1."
@@ -61,7 +60,7 @@ db.orders.insertMany([
                 width: "200",
                 height: "300",
                 shutter: {
-                    id: 1,
+                    seqNo: 1,
                     color: "white",
                     material: "plastic",
                     type: "basic",
@@ -82,8 +81,7 @@ db.orders.insertMany([
     },
 
     {
-        id: 2,
-        costumer_data:  {
+        customerData:  {
 	        name: "Kis Pál",
 	        email: "kispal@mail.com",
 	        address: "3525 Msikolc Hősök tere 1."
@@ -119,8 +117,7 @@ db.orders.insertMany([
     },
 
     {
-        id: 3,
-        costumer_data:  {
+        customerData:  {
 	        name: "Kis Pál2",
 	        email: "kispal2@mail.com",
 	        address: "3525 Msikolc Hősök tere 2."
