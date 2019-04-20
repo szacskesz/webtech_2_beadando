@@ -9,17 +9,25 @@ function getAllOrders(successCallback, errorCallback) {
     try {
         var client = new MongoClient(url, { useNewUrlParser: true });
         client.connect((err) => {
-            assert.equal(null, err);
-    
-            const db = client.db(dbName);
-            const collection= db.collection(collectionName)
-    
-            collection.find().toArray((err, orders) => {
-                assert.equal(err, null);
+            try {
+                assert.equal(null, err);
+        
+                const db = client.db(dbName);
+                const collection= db.collection(collectionName)
+        
+                collection.find().toArray((err, orders) => {
+                    try {
+                        assert.equal(err, null);
 
-                client.close();
-                successCallback(orders)
-            });
+                        client.close();
+                        successCallback(orders)
+                    } catch (error) {
+                        errorCallback(error);
+                    }
+                });
+            } catch (error) {
+                errorCallback(error);
+            }
         })
     } catch (error) {
         errorCallback(error);
@@ -30,21 +38,29 @@ function getAllOrdersByUsername(username, successCallback, errorCallback) {
     try {
         var client = new MongoClient(url, { useNewUrlParser: true });
         client.connect((err) => {
-            assert.equal(null, err);
+            try {
+                assert.equal(null, err);
+        
+                const db = client.db(dbName);
+                const collection= db.collection(collectionName)
     
-            const db = client.db(dbName);
-            const collection= db.collection(collectionName)
-  
-            collection.find(
-                {
-                    "costumer_data.name": username
-                }
-            ).toArray((err, orders) => {
-                assert.equal(err, null);
+                collection.find(
+                    {
+                        "costumer_data.name": username
+                    }
+                ).toArray((err, orders) => {
+                    try {
+                        assert.equal(err, null);
 
-                client.close();
-                successCallback(orders)
-            });
+                        client.close();
+                        successCallback(orders)
+                    } catch (error) {
+                        errorCallback(error);
+                    }
+                });
+            } catch (error) {
+                errorCallback(error);
+            }
         })
     } catch (error) {
         errorCallback(error);
@@ -55,18 +71,26 @@ function createOrder(order, successCallback, errorCallback) {
     try {
         var client = new MongoClient(url, { useNewUrlParser: true });
         client.connect((err) => {
-            assert.equal(null, err);
-    
-            const db = client.db(dbName);
-            const collection= db.collection(collectionName)
-
-            collection.insertOne(order, (err,response) => {
+            try {
                 assert.equal(null, err);
-                assert.equal(1, response.insertedCount);
+        
+                const db = client.db(dbName);
+                const collection= db.collection(collectionName)
 
-                client.close();
-                successCallback()
-            })
+                collection.insertOne(order, (err,response) => {
+                    try {
+                        assert.equal(null, err);
+                        assert.equal(1, response.insertedCount);
+
+                        client.close();
+                        successCallback()
+                    } catch (error) {
+                        errorCallback(error);
+                    }
+                })
+            } catch (error) {
+                errorCallback(error);
+            }
         })
     } catch (error) {
         errorCallback(error);
@@ -77,33 +101,40 @@ function finishShutter(orderId, shutterId, successCallback, errorCallback) {
     try {
         var client = new MongoClient(url, { useNewUrlParser: true });
         client.connect((err) => {
-            assert.equal(null, err);
-    
-            const db = client.db(dbName);
-            const collection= db.collection(collectionName)
+            try {
+                assert.equal(null, err);
+        
+                const db = client.db(dbName);
+                const collection= db.collection(collectionName)
 
-            collection.update(
-                {
-                    "id": orderId,
-                    "windows": [{
-                        "shutter": {
-                            "id": shutterId
+                collection.update(
+                    {
+                        "id": orderId,
+                        "windows": [{
+                            "shutter": {
+                                "id": shutterId
+                            }
+                        }]
+                    },
+                    {
+                        $set: {
+                            "windows.$.shutter.isFinished": true
                         }
-                    }]
-                },
-                {
-                    $set: {
-                        "windows.$.shutter.isFinished": true
-                    }
-                },
-                (err, response) => {
-                    assert.equal(null, err);
-                    assert.equal(1, response.insertedCount);
+                    },
+                    (err, response) => {
+                        try {
+                            assert.equal(null, err);
 
-                    client.close();
-                    successCallback()
-                }
-            )
+                            client.close();
+                            successCallback()
+                        } catch (error) {
+                            errorCallback(error);
+                        }
+                    }
+                )
+            } catch (error) {
+                errorCallback(error);
+            }
         })
     } catch (error) {
         errorCallback(error);
@@ -114,29 +145,37 @@ function createInvoiceForOrder(orderId, invoice, successCallback, errorCallback)
     try {
         var client = new MongoClient(url, { useNewUrlParser: true });
         client.connect((err) => {
-            assert.equal(null, err);
-    
-            const db = client.db(dbName);
-            const collection= db.collection(collectionName)
+            try {
+                assert.equal(null, err);
+        
+                const db = client.db(dbName);
+                const collection= db.collection(collectionName)
 
-            collection.update(
-                {
-                    "id": orderId
-                },
-                {
-                    $set: {
-                        //TODO json stringify?
-                        "invoice": invoice
+                collection.update(
+                    {
+                        "id": orderId
+                    },
+                    {
+                        $set: {
+                            //TODO json stringify?
+                            "invoice": invoice
+                        }
+                    },
+                    (err, response) => {
+                        try {
+                            assert.equal(null, err);
+                            assert.equal(1, response.insertedCount);
+
+                            client.close();
+                            successCallback()
+                        } catch (error) {
+                            errorCallback(error);
+                        }
                     }
-                },
-                (err, response) => {
-                    assert.equal(null, err);
-                    assert.equal(1, response.insertedCount);
-
-                    client.close();
-                    successCallback()
-                }
-            )
+                )
+            } catch (error) {
+                errorCallback(error);
+            }
         })
     } catch (error) {
         errorCallback(error);
