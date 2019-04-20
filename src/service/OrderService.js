@@ -32,11 +32,30 @@ OrderService.prototype.getAllOrdersByUsername = function(username, successCallba
     })
 }
 
-OrderService.prototype.createOrder = function(order, successCallback, successCallback){
-    //TODO generate parts
-    this.orderDao.createOrder(order, () => {
+OrderService.prototype.createOrder = function(order, successCallback, errorCallback){
+    for (let i = 0; i < order.windows.length; i++) {
+        order.windows[i].shutter.parts = [
+            {
+                count: Math.ceil(order.windows[i].width / 30),
+                description: `${order.windows[i].width}mm wide, ${order.windows[i].shutter.color} ${order.windows[i].shutter.material} rod`
+            },
+            {
+                count: 2,
+                description: "Rope"
+            }
+        ]
+
+        if( order.windows[i].shutter.type === "with bug-screen") {
+            order.windows[i].shutter.parts.push({
+                count: 1,
+                description: "Bug-screen"
+            })
+        }
+    }
+
+    this.orderDao.createOrder(order, (createdId) => {
         logger.info("createOrder: Order successfully created")
-        successCallback()
+        successCallback(createdId)
     }, (error) => {
         logger.error("Error in createOrder, cause: " + error)
         errorCallback(error)
