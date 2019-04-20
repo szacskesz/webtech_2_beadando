@@ -68,6 +68,40 @@ function getAllOrdersByUsername(username, successCallback, errorCallback) {
     }
 }
 
+function getOrderById(orderId, successCallback, errorCallback) {
+    try {
+        var client = new MongoClient(url, { useNewUrlParser: true });
+        client.connect((err) => {
+            try {
+                assert.equal(null, err, err);
+        
+                const db = client.db(dbName);
+                const collection= db.collection(collectionName)
+    
+                collection.findOne(
+                    {
+                        "_id": ObjectID(orderId)   
+                    },
+                    (err, order) => {
+                        try {
+                            assert.equal(null, err, err);
+
+                            client.close();
+                            successCallback(order)
+                        } catch (error) {
+                            errorCallback(error);
+                        }
+                    }
+                );
+            } catch (error) {
+                errorCallback(error);
+            }
+        })
+    } catch (error) {
+        errorCallback(error);
+    }
+}
+
 function createOrder(order, successCallback, errorCallback) {
     try {
         var client = new MongoClient(url, { useNewUrlParser: true });
@@ -185,6 +219,7 @@ function createInvoiceForOrder(orderId, invoice, successCallback, errorCallback)
 module.exports = {
     "getAllOrders" : getAllOrders,
     "getAllOrdersByUsername" : getAllOrdersByUsername,
+    "getOrderById": getOrderById,
     "createOrder" : createOrder,
     "finishShutter": finishShutter,
     "createInvoiceForOrder": createInvoiceForOrder

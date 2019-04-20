@@ -22,6 +22,16 @@ OrderService.prototype.getAllOrders = function(successCallback, errorCallback){
     })
 }
 
+OrderService.prototype.getOrderById = function(orderId, successCallback, errorCallback){
+    this.orderDao.getOrderById(orderId, (order) => {
+        logger.info("getOrderById: order was found!")
+        successCallback(order)
+    }, (error) => {
+        logger.error("Error in getOrderById, cause: " + error)
+        errorCallback(error)
+    })
+}
+
 OrderService.prototype.getAllOrdersByUsername = function(username, successCallback, errorCallback){
     this.orderDao.getAllOrdersByUsername(username, (orders) => {
         logger.info(`getAllOrdersByUsername: ${orders.length} orders were found!`)
@@ -71,7 +81,6 @@ OrderService.prototype.finishShutter = function(orderId, shutterId, successCallb
         errorCallback(error)
     })
 }
-
 
 OrderService.prototype.createInvoiceForOrder = function(orderId, invoice, successCallback, errorCallback){
     this.orderDao.createInvoiceForOrder(orderId, invoice, () => {

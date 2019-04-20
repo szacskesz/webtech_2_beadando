@@ -29,6 +29,24 @@ routes.post("/getAllOrdersByUsername", (req, resp) => {
     });
 })
 
+routes.post("/getOrderById", (req, resp) => {
+    if(req.body["orderId"] == undefined) {
+        resp.status(400).send({"error": "orderId must be defined"});
+        return;
+    }
+
+    if(!checkForHexRegExp.test(req.body["orderId"])) {
+        resp.status(400).send({"error": "orderId must be 24 hex string"});
+        return;
+    }
+
+    orderService.getOrderById(req.body["orderId"], (order) => {
+        resp.status(200).send({"order": order});
+    }, (error) => {
+        resp.status(400).send({"error": error});
+    });
+})
+
 routes.post("/createOrder", (req, resp) => {
     let order;
     try {
@@ -92,7 +110,6 @@ routes.post("/createInvoiceForOrder", (req, resp) => {
         resp.status(500).send({"error": error});
     });
 })
-
 
 module.exports = {
     routes: routes
