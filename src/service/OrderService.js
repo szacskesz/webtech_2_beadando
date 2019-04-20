@@ -32,12 +32,12 @@ OrderService.prototype.getOrderById = function(orderId, successCallback, errorCa
     })
 }
 
-OrderService.prototype.getAllOrdersByUsername = function(username, successCallback, errorCallback){
-    this.orderDao.getAllOrdersByUsername(username, (orders) => {
-        logger.info(`getAllOrdersByUsername: ${orders.length} orders were found!`)
+OrderService.prototype.getAllOrdersByEmail = function(email, successCallback, errorCallback){
+    this.orderDao.getAllOrdersByEmail(email, (orders) => {
+        logger.info(`getAllOrdersByEmail: ${orders.length} orders were found!`)
         successCallback(orders)
     }, (error) => {
-        logger.error("Error in getAllOrdersByUsername, cause: " + error)
+        logger.error("Error in getAllOrdersByEmail, cause: " + error)
         errorCallback(error)
     })
 }

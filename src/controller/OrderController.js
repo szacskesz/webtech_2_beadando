@@ -7,6 +7,7 @@ var OrderService = require("../service/OrderService");
 const orderService = new OrderService();
 
 const checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
+const emailRegexp = new RegExp('\\S+@\\S+\\.\\S+','i');
 
 routes.get("/getAllOrders", (req, resp) => {
     orderService.getAllOrders((orders) => {
@@ -16,13 +17,18 @@ routes.get("/getAllOrders", (req, resp) => {
     });
 })
 
-routes.post("/getAllOrdersByUsername", (req, resp) => {
-    if(req.body["username"] == undefined) {
-        resp.status(400).send({"error": "username must be defined"});
+routes.post("/getAllOrdersByEmail", (req, resp) => {
+    if(req.body["email"] == undefined) {
+        resp.status(400).send({"error": "email must be defined"});
         return;
     }
 
-    orderService.getAllOrdersByUsername(req.body["username"], (orders) => {
+    if(!emailRegexp.test(req.body["email"])) {
+        resp.status(400).send({"error": "email must be a valid email address"});
+        return;
+    }
+
+    orderService.getAllOrdersByEmail(req.body["email"], (orders) => {
         resp.status(200).send({"orders": orders});
     }, (error) => {
         resp.status(400).send({"error": error});

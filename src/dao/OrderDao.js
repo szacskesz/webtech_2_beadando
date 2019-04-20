@@ -35,7 +35,7 @@ function getAllOrders(successCallback, errorCallback) {
     }
 }
 
-function getAllOrdersByUsername(username, successCallback, errorCallback) {
+function getAllOrdersByEmail(email, successCallback, errorCallback) {
     try {
         var client = new MongoClient(url, { useNewUrlParser: true });
         client.connect((err) => {
@@ -47,7 +47,7 @@ function getAllOrdersByUsername(username, successCallback, errorCallback) {
     
                 collection.find(
                     {
-                        "customerData.name": username
+                        "customerData.email": email
                     }
                 ).toArray((err, orders) => {
                     try {
@@ -217,7 +217,7 @@ function createInvoiceForOrder(orderId, invoice, successCallback, errorCallback)
 
 module.exports = {
     "getAllOrders" : getAllOrders,
-    "getAllOrdersByUsername" : getAllOrdersByUsername,
+    "getAllOrdersByEmail" : getAllOrdersByEmail,
     "getOrderById": getOrderById,
     "createOrder" : createOrder,
     "finishShutter": finishShutter,
