@@ -1,4 +1,4 @@
-function OrderService() {
+function OrderService(orderDao) {
     winston = require('winston')
     logger = winston.createLogger({
         level: 'info',
@@ -8,7 +8,12 @@ function OrderService() {
             new winston.transports.File({ filename: 'logs/combined.log' })
         ]
     });
-    this.orderDao = require('../dao/OrderDao');
+
+    if(orderDao !== undefined) {
+        this.orderDao = orderDao;
+    } else {
+        this.orderDao = require('../dao/OrderDao');
+    }
 }
 
 OrderService.prototype.getAllOrders = function(successCallback, errorCallback){
@@ -45,7 +50,7 @@ OrderService.prototype.createOrder = function(order, successCallback, errorCallb
     for (let i = 0; i < order.windows.length; i++) {
         order.windows[i].shutter.parts = [
             {
-                count: Math.ceil(order.windows[i].width / 30),
+                count: Math.ceil(order.windows[i].height / 30),
                 description: `${order.windows[i].width}mm wide, ${order.windows[i].shutter.color} ${order.windows[i].shutter.material} rod`
             },
             {

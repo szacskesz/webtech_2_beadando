@@ -1,4 +1,4 @@
-function ShutterDataService() {
+function ShutterDataService(shutterDataDao) {
     winston = require('winston')
     logger = winston.createLogger({
         level: 'info',
@@ -8,7 +8,12 @@ function ShutterDataService() {
             new winston.transports.File({ filename: 'logs/combined.log' })
         ]
     });
-    this.shutterDataDao = require('../dao/ShutterDataDao');
+    
+    if(shutterDataDao !== undefined) {
+        this.shutterDataDao = shutterDataDao;
+    } else {
+        this.shutterDataDao = require('../dao/ShutterDataDao');
+    }
 }
 
 ShutterDataService.prototype.getAllShutterColors = function(successCallback, errorCallback){
