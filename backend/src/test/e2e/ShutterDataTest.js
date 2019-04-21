@@ -1,6 +1,6 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const app = require('../../main');
+const app = require('../../server');
 
 const checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
 
