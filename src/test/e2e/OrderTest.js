@@ -18,6 +18,7 @@ describe("Order e2e tests", () => {
     let json = {
         order: {
             comment: "no..",
+            isInstalled: false,
             customerData: {
                 name: "A" ,
                 email: createdEmail,
@@ -158,6 +159,7 @@ describe("Order e2e tests", () => {
                 assert.equal(res.status, 200);
                 assert.typeOf(res.body, 'object');
                 assert.typeOf(res.body.order, 'object');
+                assert.equal(res.body.order.isInstalled, false);
                 assert.typeOf(res.body.order.windows, 'array');
                 assert.isAbove(res.body.order.windows.length, 0);
                 assert.notExists(res.body.order.invoice);
@@ -389,6 +391,85 @@ describe("Order e2e tests", () => {
                 assert.typeOf(res.body.order.invoice, 'object');
                 assert.equal(res.body.order.invoice.price, 1);
                 assert.equal(res.body.order.invoice.isPaid, false);
+
+                try {
+                    let order = new OrderClass.OrderFromJson(res.body.order);
+                } catch (error) {
+                    assert.fail();
+                }
+                
+                done();
+            });
+    });
+
+    step("should fail finishInstallation", (done) => {
+        chai.request(app)
+            .post('/order/finishInstallation')
+            .send({})
+            .end((err, res) => {
+                assert.equal(res.status, 400);
+                
+                done();
+            });
+    });
+
+    step("should fail finishInstallation v2", (done) => {
+        chai.request(app)
+            .post('/order/finishInstallation')
+            .send({"orderId": undefined})
+            .end((err, res) => {
+                assert.equal(res.status, 400);
+                
+                done();
+            });
+    });
+
+    step("should fail finishInstallation v3", (done) => {
+        chai.request(app)
+            .post('/order/finishInstallation')
+            .send({"orderId": -1})
+            .end((err, res) => {
+                assert.equal(res.status, 400);
+                
+                done();
+            });
+    });
+
+    step("should succeed finishInstallation", (done) => {
+        chai.request(app)
+            .post('/order/finishInstallation')
+            .send({"orderId": createdId})
+            .end((err, res) => {
+                assert.equal(res.status, 200);
+                
+                done();
+            });
+    });
+
+    step("should have installed true on order", (done) => {
+        chai.request(app)
+            .post('/order/getOrderById')
+            .send({"orderId": createdId})
+            .end((err, res) => {
+                assert.equal(res.status, 200);
+                assert.typeOf(res.body, 'object');
+                assert.typeOf(res.body.order, 'object');
+                assert.equal(res.body.order.isInstalled, true);
+                assert.typeOf(res.body.order.windows, 'array');
+                assert.isAbove(res.body.order.windows.length, 0);
+                assert.exists(res.body.order.invoice);
+                for (let i = 0; i < res.body.order.windows.length; i++) {
+                    assert.typeOf(res.body.order.windows[i].shutter, 'object');
+                    assert.exists(res.body.order.windows[i].shutter.id);
+                    createdShutterId = res.body.order.windows[i].shutter.id;
+                    if(res.body.order.windows[i].shutter.id === createdShutterId) {
+                        assert.equal(res.body.order.windows[i].shutter.isFinished, true)
+                    } else {
+                        assert.equal(res.body.order.windows[i].shutter.isFinished, false);
+                    }
+                    assert.typeOf(res.body.order.windows[i].shutter.parts, 'array');
+                    assert.isAbove(res.body.order.windows[i].shutter.parts.length, 0);
+                }
 
                 try {
                     let order = new OrderClass.OrderFromJson(res.body.order);

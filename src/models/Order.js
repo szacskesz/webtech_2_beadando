@@ -2,7 +2,7 @@ var InvoiceClass = require("./Invoice");
 var CustomerDataClass = require("./CustomerData");
 var WindowClass = require("./Window");
 
-function Order(comment, customerData, invoice, windows) {
+function Order(comment, isInstalled, customerData, invoice, windows) {
     if(comment === undefined) {
         throw "Error(Order): comment cannot be undefined";
     }
@@ -12,9 +12,15 @@ function Order(comment, customerData, invoice, windows) {
     if(windows === undefined) {
         throw "Error(Order): windows cannot be undefined";
     }
+    if(isInstalled === undefined) {
+        throw "Error(Order): isInstalled cannot be undefined";
+    }
 
     if(typeof comment !== 'string') {
         throw "Error(Order): comment must be a string";
+    }
+    if(typeof isInstalled !== 'boolean') {
+        throw "Error(Order): isInstalled must be a boolean";
     }
 
     if(!Array.isArray(windows)) {
@@ -34,6 +40,7 @@ function Order(comment, customerData, invoice, windows) {
     if(invoice !== undefined) {
         this.invoice = new InvoiceClass.InvoiceFromJson(invoice);
     }
+    this.isInstalled = isInstalled;
     this.windows = windows;
 }
 
@@ -42,7 +49,7 @@ function OrderFromJson(order) {
         throw "Error(Order): order cannot be undefined";
     }
 
-    return new Order(order.comment, order.customerData, order.invoice, order.windows);
+    return new Order(order.comment, order.isInstalled, order.customerData, order.invoice, order.windows);
 }
 
 module.exports = {

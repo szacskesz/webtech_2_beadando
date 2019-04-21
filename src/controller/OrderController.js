@@ -69,6 +69,25 @@ routes.post("/createOrder", (req, resp) => {
     });
 })
 
+
+routes.post("/finishInstallation", (req, resp) => {
+    if(req.body["orderId"] == undefined) {
+        resp.status(400).send({"error": "orderId must be defined"});
+        return;
+    }
+
+    if(!checkForHexRegExp.test(req.body["orderId"])) {
+        resp.status(400).send({"error": "orderId must be 24 hex string"});
+        return;
+    }
+
+    orderService.finishInstallation(req.body["orderId"], () => {
+        resp.status(200).send();
+    }, (error) => {
+        resp.status(400).send({"error": error});
+    });
+})
+
 routes.post("/finishShutter", (req, resp) => {
     if(req.body["orderId"] == undefined) {
         resp.status(400).send({"error": "orderId must be defined"});

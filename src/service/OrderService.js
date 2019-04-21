@@ -86,6 +86,16 @@ OrderService.prototype.finishShutter = function(orderId, shutterId, successCallb
     })
 }
 
+OrderService.prototype.finishInstallation = function(orderId, successCallback, errorCallback){
+    this.orderDao.finishInstallation(orderId, () => {
+        logger.info("finishInstallation: Order successfully installed")
+        successCallback()
+    }, (error) => {
+        logger.error("Error in finishInstallation, cause: " + error)
+        errorCallback(error)
+    })
+}
+
 OrderService.prototype.createInvoiceForOrder = function(orderId, invoice, successCallback, errorCallback){
     this.orderDao.createInvoiceForOrder(orderId, invoice, () => {
         logger.info("createInvoiceForOrder: invoice succesfully created on order")

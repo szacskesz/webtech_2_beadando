@@ -41,7 +41,7 @@ describe('Order class tests', () => {
                 }
             }));
 
-            let order = new OrderClass.Order(comment, customerData, invoice, windows);
+            let order = new OrderClass.Order(comment, false, customerData, invoice, windows);
             assert.fail();
         } catch (error) {
             assert.equal(error, "Error(Order): comment cannot be undefined")
@@ -75,7 +75,7 @@ describe('Order class tests', () => {
                 }
             }));
 
-            let order = new OrderClass.Order(comment, customerData, invoice, windows);
+            let order = new OrderClass.Order(comment, false, customerData, invoice, windows);
             assert.fail();
         } catch (error) {
             assert.equal(error, "Error(Order): customerData cannot be undefined")
@@ -89,7 +89,7 @@ describe('Order class tests', () => {
             let invoice = new InvoiceClass.Invoice(100, false);
             let windows = undefined;
 
-            let order = new OrderClass.Order(comment, customerData, invoice, windows);
+            let order = new OrderClass.Order(comment, false, customerData, invoice, windows);
             assert.fail();
         } catch (error) {
             assert.equal(error, "Error(Order): windows cannot be undefined")
@@ -123,7 +123,7 @@ describe('Order class tests', () => {
                 }
             }));
 
-            let order = new OrderClass.Order(comment, customerData, invoice, windows);
+            let order = new OrderClass.Order(comment, false, customerData, invoice, windows);
             assert.fail();
         } catch (error) {
             assert.equal(error, "Error(Order): comment must be a string")
@@ -146,7 +146,7 @@ describe('Order class tests', () => {
                 }
             });
 
-            let order = new OrderClass.Order(comment, customerData, invoice, windows);
+            let order = new OrderClass.Order(comment, false, customerData, invoice, windows);
             assert.fail();
         } catch (error) {
             assert.equal(error, "Error(Order): windows must be an array")
@@ -160,7 +160,7 @@ describe('Order class tests', () => {
             let invoice = new InvoiceClass.Invoice(100, false);
             let windows = [];
 
-            let order = new OrderClass.Order(comment, customerData, invoice, windows);
+            let order = new OrderClass.Order(comment, false, customerData, invoice, windows);
             assert.fail();
         } catch (error) {
             assert.equal(error, "Error(Order): windows size must be at least 1")
@@ -194,7 +194,7 @@ describe('Order class tests', () => {
                 }
             }));
 
-            let order = new OrderClass.Order(comment, customerData, invoice, windows);
+            let order = new OrderClass.Order(comment, false, customerData, invoice, windows);
         } catch (error) {
             assert.fail();
         }
@@ -217,7 +217,7 @@ describe('Order class tests', () => {
                 }
             }));
 
-            let order = new OrderClass.Order(comment, customerData, invoice, windows);
+            let order = new OrderClass.Order(comment, false, customerData, invoice, windows);
         } catch (error) {
             assert.fail();
         }

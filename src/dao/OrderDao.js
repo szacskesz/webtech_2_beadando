@@ -102,6 +102,33 @@ async function finishShutter(orderId, shutterId, successCallback, errorCallback)
     )
 }
 
+async function finishInstallation(orderId, successCallback, errorCallback) {
+    const db = await getDatabaseConnection();
+    const collection = db.collection(collectionName)
+
+    collection.updateOne(
+        {
+            "_id": ObjectID(orderId)
+        },
+        {
+            $set: {
+                "isInstalled": true
+            }
+        },
+        (err, response) => {
+            try {
+                assert.equal(null, err, err);
+                assert.equal(1, response.matchedCount, "Could not find order");
+                assert.equal(1, response.modifiedCount, "Could not update order (maybe already updated?)");
+
+                successCallback()
+            } catch (error) {
+                errorCallback("" + error);
+            }
+        }
+    )
+}
+
 async function createInvoiceForOrder(orderId, invoice, successCallback, errorCallback) {
     const db = await getDatabaseConnection();
     const collection = db.collection(collectionName)
@@ -135,5 +162,6 @@ module.exports = {
     "getOrderById": getOrderById,
     "createOrder" : createOrder,
     "finishShutter": finishShutter,
+    "finishInstallation": finishInstallation,
     "createInvoiceForOrder": createInvoiceForOrder
 }

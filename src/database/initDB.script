@@ -55,6 +55,7 @@ db.orders.insertMany([
 	        isPaid: false
         },
         comment: "No comment",
+        isInstalled: false,
         windows: [  
 	        {
                 width: 200,
@@ -91,6 +92,7 @@ db.orders.insertMany([
 	        isPaid: false
         },
         comment: "No comment",
+        isInstalled: false,
         windows: [  
 	        {
                 width: 200,
@@ -123,6 +125,7 @@ db.orders.insertMany([
 	        address: "3525 Msikolc Hősök tere 2."
         },
         comment: "No comment",
+        isInstalled: false,
         windows: [  
 	        {
                 width: 200,
