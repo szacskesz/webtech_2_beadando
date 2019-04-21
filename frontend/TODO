@@ -1,0 +1,9 @@
+TODO statistics FE
+    - all order count (+ finished unfinished partially-finished count)
+    - all income (paid)
+    - planned income (unpaid)
+
+bootstrap template
+fontawsome
+scss
+uglify
