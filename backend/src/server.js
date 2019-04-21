@@ -7,10 +7,14 @@ const shutterDataController = require("./controller/ShutterDataController").rout
 var app = express();
 app.use(bodyParser.json());
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 app.use('/order/', orderController);
 app.use('/shutter-data/', shutterDataController);
-
-// app.use(express.static('src/public'));
 
 app.listen(8080, () => {
     console.log("App is listening on port 8080");
