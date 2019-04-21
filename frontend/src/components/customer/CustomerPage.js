@@ -1,13 +1,20 @@
 import React, { Component } from "react";
 import { CustomerDataForm } from "./CustomerDataForm"
+import { CustomerMainPage } from "./CustomerMainPage"
 
 export class CustomerPage extends Component {
-    state = {
-        costumerData: undefined
-    };
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            customerData: undefined
+        };
+    
+    }
 
     setCustomerData = (customerData) => {
-        this.setState({costumerData: customerData});
+        this.setState({customerData: customerData});
     }
 
     render() {
@@ -15,9 +22,9 @@ export class CustomerPage extends Component {
             <React.Fragment>
                 <h1>Customer page</h1>
                 {
-                    (this.state.costumerData === undefined)
+                    (this.state.customerData === undefined)
                     ? <CustomerDataForm setCustomerData={this.setCustomerData} />
-                    : <div>def</div>
+                    : <CustomerMainPage customerData={this.state.customerData}  />
                 }
             </React.Fragment>
         )
