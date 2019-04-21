@@ -1,8 +1,7 @@
-TODO tesztek írása
 TODO mongodb inicializálás
-TODO statistics
-    - all order count (+ finished unfinished count)
-    - all income (finished)
-    - planned income (unfinished)
+TODO statistics FE
+    - all order count (+ finished unfinished partially-finished count)
+    - all income (paid)
+    - planned income (unpaid)
 
 TODO organize isntallation

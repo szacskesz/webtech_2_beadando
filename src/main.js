@@ -1,8 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
-const orderController = require("./src/controller/OrderController").routes;
-const shutterDataController = require("./src/controller/ShutterDataController").routes;
+const orderController = require("./controller/OrderController").routes;
+const shutterDataController = require("./controller/ShutterDataController").routes;
 
 var app = express();
 app.use(bodyParser.json());
@@ -16,4 +16,5 @@ app.listen(8080, () => {
     console.log("App is listening on port 8080");
 })
 
-
+// export for testing
+module.exports = app;

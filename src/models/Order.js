@@ -31,7 +31,9 @@ function Order(comment, customerData, invoice, windows) {
 
     this.comment = comment;
     this.customerData = new CustomerDataClass.CustomerDataFromJson(customerData);
-    this.invoice = invoice === undefined ? undefined : new InvoiceClass.InvoiceFromJson(invoice);
+    if(invoice !== undefined) {
+        this.invoice = new InvoiceClass.InvoiceFromJson(invoice);
+    }
     this.windows = windows;
 }
 

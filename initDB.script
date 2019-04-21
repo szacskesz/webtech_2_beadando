@@ -57,8 +57,8 @@ db.orders.insertMany([
         comment: "No comment",
         windows: [  
 	        {
-                width: "200",
-                height: "300",
+                width: 200,
+                height: 300,
                 shutter: {
                     seqNo: 1,
                     color: "white",
@@ -93,8 +93,8 @@ db.orders.insertMany([
         comment: "No comment",
         windows: [  
 	        {
-                width: "200",
-                height: "300",
+                width: 200,
+                height: 300,
                 shutter: {
                     id: 2,
                     color: "white",
@@ -125,8 +125,8 @@ db.orders.insertMany([
         comment: "No comment",
         windows: [  
 	        {
-                width: "200",
-                height: "300",
+                width: 200,
+                height: 300,
                 shutter: {
                     id: 3,
                     color: "white",

@@ -28,7 +28,7 @@ function Window(width, height, shutter) {
 
     this.width =  width;
     this.height =  height;
-    this.shutter = new ShutterClass.ShutterFromJson(shutter);;
+    this.shutter = new ShutterClass.ShutterFromJson(shutter);
 }
 
 function WindowFromJson(window) {
