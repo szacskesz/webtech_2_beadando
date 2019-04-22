@@ -13,9 +13,9 @@ export class CustomerDataForm extends Component {
             },
             error: {
                 customerData: {
-                    name: false,
-                    email: false,
-                    address: false
+                    name: undefined,
+                    email: undefined,
+                    address: undefined
                 }
             }
         };
@@ -99,7 +99,8 @@ export class CustomerDataForm extends Component {
     }
 
     validateEmail = () => {
-        if(this.state.customerData.email === "") {
+        const emailRegexp = new RegExp('\\S+@\\S+\\.\\S+','i');
+        if(this.state.customerData.email === "" || !emailRegexp.test(this.state.customerData.email)) {
             this.setState((prevState) => (
                 {
                     ...prevState,
@@ -185,54 +186,93 @@ export class CustomerDataForm extends Component {
 
     render() {
         return (
-            <form onSubmit={(e) => this.saveForm(e)} >
-                <div>
-                    <label>Name:</label>
-                    <input 
-                        type="text"
-                        name="name"
-                        value={this.state.customerData.name}
-                        onChange={this.handleNameChange}
-                        className={ this.state.error.customerData.name ? "hasError" : ""}
-                    />
-                </div>
-                {
-                    this.state.error.customerData.name &&
-                    <div className="errorDesc">Invalid value!</div>
-                }
 
-                <div>
-                    <label>Email:</label>
-                    <input 
-                        type="text"
-                        name="email"
-                        value={this.state.customerData.email}
-                        onChange={this.handleEmailChange}
-                        className={ this.state.error.customerData.email ? "hasError" : ""}
-                    />
+            <form className="form-horizontal"  onSubmit={(e) => this.saveForm(e)}>
+                <div 
+                    className={ this.state.error.customerData.name === true 
+                        ? "form-group has-error" 
+                        : this.state.error.customerData.name === false
+                            ? "form-group has-success"
+                            : "form-group"
+                    }
+                >
+                    <label className="control-label col-sm-1">Name:</label>
+                    <div className="col-sm-11">
+                        <input
+                            id="name"
+                            type="text"
+                            name="name"
+                            placeholder="Enter name"
+                            value={this.state.customerData.name}
+                            onChange={this.handleNameChange}
+                            onBlur={this.validateName}
+                            className={"form-control"}
+                        />
+                        {
+                            this.state.error.customerData.name &&
+                            <div className="errorDesc">Invalid value!</div>
+                        }
+                    </div>
                 </div>
-                {
-                    this.state.error.customerData.email &&
-                    <div className="errorDesc">Invalid value!</div>
-                }
 
-                <div>
-                    <label>Address:</label>
-                    <input 
-                        type="text"
-                        name="name"
-                        value={this.state.customerData.address}
-                        onChange={this.handleAddressChange}
-                        className={ this.state.error.customerData.address ? "hasError" : ""}
-                    />
+                <div 
+                    className={ this.state.error.customerData.email === true 
+                        ? "form-group has-error" 
+                        : this.state.error.customerData.email === false
+                            ? "form-group has-success"
+                            : "form-group"
+                    }
+                >
+                    <label className="control-label col-sm-1">Email:</label>
+                    <div className="col-sm-11">
+                        <input
+                            id="email"
+                            type="email"
+                            name="email"
+                            placeholder="Enter email"
+                            value={this.state.customerData.email}
+                            onChange={this.handleEmailChange}
+                            onBlur={this.validateEmail}
+                            className={"form-control"}
+                        />
+                        {
+                            this.state.error.customerData.email &&
+                            <div className="errorDesc">Invalid value!</div>
+                        }
+                    </div>
                 </div>
-                {
-                    this.state.error.customerData.address &&
-                    <div className="errorDesc">Invalid value!</div>
-                }
 
-                <div>
-                    <input type="submit" value="Submit" />
+                <div 
+                    className={ this.state.error.customerData.address === true 
+                        ? "form-group has-error" 
+                        : this.state.error.customerData.address === false
+                            ? "form-group has-success"
+                            : "form-group"
+                    }
+                >
+                    <label className="control-label col-sm-1">Address:</label>
+                    <div className="col-sm-11">
+                        <input
+                            id="address"
+                            type="text"
+                            name="address"
+                            placeholder="Enter address"
+                            value={this.state.customerData.address}
+                            onChange={this.handleAddressChange}
+                            onBlur={this.validateAddress}
+                            className={"form-control"}
+                        />
+                        {
+                            this.state.error.customerData.address &&
+                            <div className="errorDesc">Invalid value!</div>
+                        }
+                    </div>
+                </div>
+
+                <div className="form-group"> 
+                    <div className="col-sm-offset-1 col-sm-11">
+                        <button type="submit" className="btn btn-primary">Submit</button>
+                    </div>
                 </div>
             </form>
         )

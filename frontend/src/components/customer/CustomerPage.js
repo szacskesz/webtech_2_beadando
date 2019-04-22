@@ -20,12 +20,17 @@ export class CustomerPage extends Component {
     render() {
         return (
             <React.Fragment>
-                <h1>Customer page</h1>
-                {
-                    (this.state.customerData === undefined)
-                    ? <CustomerDataForm setCustomerData={this.setCustomerData} />
-                    : <CustomerMainPage customerData={this.state.customerData}  />
-                }
+                <div className="container-fluid">
+                    
+                    <div className="text-center header-text">
+                        <h1>Customer page</h1>
+                    </div>
+                    {
+                        (this.state.customerData === undefined)
+                        ? <CustomerDataForm setCustomerData={this.setCustomerData} />
+                        : <CustomerMainPage customerData={this.state.customerData}  />
+                    }
+                </div>
             </React.Fragment>
         )
     }

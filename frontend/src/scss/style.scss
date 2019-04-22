@@ -1,7 +1,39 @@
-.hasError {
-    background-color: red;
-}
+#shutterGutterApp {
+    
+    .errorDesc {
+        color: #a94442;
+    }
 
-.errorDesc {
-    color: red;
+    .has-error {
+        border-color: #a94442;
+    }
+    
+    .text-center {
+        text-align: center;
+    }
+
+    .header-text {
+        margin-bottom: 50px;
+    }
+    
+    #my-navbar .active-nav-link {
+        color: #337ab7;
+    }
+    
+    .my-tr-row td {
+        padding: 10px 0 0 0;
+    }
+    
+    .my-tr-row td button {
+        border-radius: 0;
+    }
+    
+    .commentField {
+        overflow-y: scroll;
+        background-color: lightgrey;
+        height: 150px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid grey;
+    }
 }
