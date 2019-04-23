@@ -19,6 +19,9 @@
 #shutterGutterApp .my-tr-row td button {
   border-radius: 0; }
 
+#shutterGutterApp .no-top-border {
+  border-top: none; }
+
 #shutterGutterApp .commentField {
   overflow-y: scroll;
   background-color: lightgrey;

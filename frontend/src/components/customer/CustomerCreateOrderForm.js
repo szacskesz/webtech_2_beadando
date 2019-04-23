@@ -409,6 +409,7 @@ export class CustomerCreateOrderForm extends Component {
         return (
 
             <form  onSubmit={(e) => this.saveForm(e)}>
+                <h2>Create order</h2>
                 <div>
                     <div>
                         <h3>Shutters 

@@ -27,6 +27,10 @@
     .my-tr-row td button {
         border-radius: 0;
     }
+
+    .no-top-border {
+        border-top: none;
+    }
     
     .commentField {
         overflow-y: scroll;
