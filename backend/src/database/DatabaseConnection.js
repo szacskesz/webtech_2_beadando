@@ -11,7 +11,7 @@ const getDatabaseConnection = async () => {
         try {
             const client = await MongoClient.connect(
                 url,
-                options={useNewUrlParser: true, safe: true, auto_reconnect: true}
+                options={useNewUrlParser: true, auto_reconnect: true}
             );
 
             databaseConnection = client.db(dbName);
@@ -24,6 +24,11 @@ const getDatabaseConnection = async () => {
     }
 }
 
+connectToDatabase = async () => {
+    await getDatabaseConnection();
+}
+
 module.exports = {
-    getDatabaseConnection: getDatabaseConnection
+    getDatabaseConnection: getDatabaseConnection,
+    connectToDatabase: connectToDatabase
 }
