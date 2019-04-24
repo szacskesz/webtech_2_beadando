@@ -1,6 +1,6 @@
 {
-    "name": "ea5",
-    "version": "0.0.1",
+    "name": "webtech-2-assignment-backend",
+    "version": "1.0.0",
     "dependencies": {
         "express": "4.16.4",
         "body-parser": "1.18.3",
