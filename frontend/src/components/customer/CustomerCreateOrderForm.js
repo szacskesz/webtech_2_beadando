@@ -458,6 +458,10 @@ export class CustomerCreateOrderForm extends Component {
                                                         
                                                         <span className="input-group-addon">mm</span>
                                                     </div>
+                                                    {
+                                                        this.state.error.order.windows[i].width &&
+                                                        <div className="errorDesc">Invalid value!</div>
+                                                    }
                                                 </div>
                                             </div>
                                         </td>
@@ -483,6 +487,10 @@ export class CustomerCreateOrderForm extends Component {
                                                         
                                                         <span className="input-group-addon">mm</span>
                                                     </div>
+                                                    {
+                                                        this.state.error.order.windows[i].height &&
+                                                        <div className="errorDesc">Invalid value!</div>
+                                                    }
                                                 </div>
                                             </div>
                                         </td>
@@ -506,6 +514,10 @@ export class CustomerCreateOrderForm extends Component {
                                                     )
                                                 }
                                                 </select>
+                                                {
+                                                    this.state.error.order.windows[i].shutter.color &&
+                                                    <div className="errorDesc">Invalid value!</div>
+                                                }
                                             </div>
                                         </td>
                                         <td>
@@ -528,6 +540,10 @@ export class CustomerCreateOrderForm extends Component {
                                                     )
                                                 }
                                                 </select>
+                                                {
+                                                    this.state.error.order.windows[i].shutter.material &&
+                                                    <div className="errorDesc">Invalid value!</div>
+                                                }
                                             </div>
                                         </td>
                                         <td>
@@ -550,6 +566,10 @@ export class CustomerCreateOrderForm extends Component {
                                                     )
                                                 }
                                                 </select>
+                                                {
+                                                    this.state.error.order.windows[i].shutter.type &&
+                                                    <div className="errorDesc">Invalid value!</div>
+                                                }
                                             </div>
                                         </td>
                                         <td>

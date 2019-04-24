@@ -50,7 +50,6 @@ export class WorkerPage extends Component {
                 allOrders: orders
             }))
         })
-
     }
 
     setSelectedShutter = (orderId, shutterId) => {
@@ -93,7 +92,7 @@ export class WorkerPage extends Component {
                 <div>
                     <h2>All orders</h2>
                     <div className="checkbox">
-                        <label><input type="checkbox" value={this.state.filterUnfinished} onChange={this.toggleFilterUnfinished} />Show only unfinished orders</label>
+                        <label><input type="checkbox" value={this.state.filterUnfinished} onChange={this.toggleFilterUnfinished} />Show only unassembled orders</label>
                     </div>
 
                     <ul className="list-group">
@@ -120,119 +119,123 @@ export class WorkerPage extends Component {
                             .map((order, i) => 
                             <li key={i} className="list-group-item">
 
-                                <div>
-                                    <div>
-                                        <h3>Order id:</h3>
-                                    </div>
-                                    <div>
-                                        {order._id}
-                                    </div>
-                                </div>
+                                <div className="row">
+                                    <div className="col-sm-6">
+                                        <div>
+                                            <div>
+                                                <h3>Order id:</h3>
+                                            </div>
+                                            <div>
+                                                {order._id}
+                                            </div>
+                                        </div>
 
-                                <div>
-                                    <div>
-                                        <h3>Comment:</h3>
+                                        <div>
+                                            <div>
+                                                <h3>Comment:</h3>
+                                            </div>
+                                            <div className={"commentField"}>
+                                                {order.comment}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className={"commentField"}>
-                                        {order.comment}
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <div>
-                                        <h3>Shutters:</h3>
-                                    </div>
-                                    <div>
-                                        <table className="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Window size(width first)</th>
-                                                    <th>Color</th>
-                                                    <th>Material</th>
-                                                    <th>Type</th>
-                                                    <th>Finished</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {
-                                                    order.windows.map((window, j) =>
-                                                    {
-                                                        const isSelectedShutter = (order._id === this.state.selectedShutter.orderId 
-                                                            && window.shutter.id === this.state.selectedShutter.shutterId);
-
-                                                        return <React.Fragment key={j}>
-                                                            <tr>
-                                                                <td>{window.width} x {window.height}</td>
-                                                                <td>{window.shutter.color}</td>
-                                                                <td>{window.shutter.material}</td>
-                                                                <td>{window.shutter.type}</td>
-                                                                <td>{window.shutter.isFinished ? "true" : "false"}</td>
-                                                                <td>
-                                                                <button 
-                                                                    type="button" 
-                                                                    className="btn btn-primary btn-block"
-                                                                    onClick={() => this.setSelectedShutter(order._id, window.shutter.id)}
-                                                                >
-                                                                    {isSelectedShutter ? "Hide parts" : "List parts"}
-                                                                </button>
-                                                                </td>
-                                                            </tr>
+                                    <div className="col-sm-6">
+                                        <div>
+                                            <div>
+                                                <h3>Shutters:</h3>
+                                            </div>
+                                            <div>
+                                                <table className="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Window size(width first)</th>
+                                                            <th>Color</th>
+                                                            <th>Material</th>
+                                                            <th>Type</th>
+                                                            <th>Assembled</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {
+                                                            order.windows.map((window, j) =>
                                                             {
-                                                                isSelectedShutter &&
-                                                                <tr>
-                                                                    <td colSpan={6} className="no-top-border">
-                                                                        <div className="col-sm-offset-1 col-sm-11">
-                                                                            <div>
-                                                                                <h3>Parts:</h3>
-                                                                            </div>
-                                                                            <div>
-                                                                                <table className="table">
-                                                                                    <thead>
-                                                                                        <tr>
-                                                                                            <th>Count</th>
-                                                                                            <th>Description</th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
+                                                                const isSelectedShutter = (order._id === this.state.selectedShutter.orderId 
+                                                                    && window.shutter.id === this.state.selectedShutter.shutterId);
+
+                                                                return <React.Fragment key={j}>
+                                                                    <tr>
+                                                                        <td>{window.width}mm x {window.height}mm</td>
+                                                                        <td>{window.shutter.color}</td>
+                                                                        <td>{window.shutter.material}</td>
+                                                                        <td>{window.shutter.type}</td>
+                                                                        <td>{window.shutter.isFinished ? "true" : "false"}</td>
+                                                                        <td>
+                                                                        <button 
+                                                                            type="button" 
+                                                                            className="btn btn-primary btn-block"
+                                                                            onClick={() => this.setSelectedShutter(order._id, window.shutter.id)}
+                                                                        >
+                                                                            {isSelectedShutter ? "Hide parts" : "List parts"}
+                                                                        </button>
+                                                                        </td>
+                                                                    </tr>
+                                                                    {
+                                                                        isSelectedShutter &&
+                                                                        <tr>
+                                                                            <td colSpan={6} className="no-top-border">
+                                                                                <div className="col-sm-offset-1 col-sm-11">
+                                                                                    <div>
+                                                                                        <h3>Parts:</h3>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <table className="table">
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    <th>Count</th>
+                                                                                                    <th>Description</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                            {
+                                                                                                window.shutter.parts.map((part, k) =>
+                                                                                                    <tr key={k}>
+                                                                                                        <td>{part.count}</td>
+                                                                                                        <td>{part.description}</td>
+                                                                                                    </tr>
+                                                                                                )
+                                                                                            }
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </div>
                                                                                     {
-                                                                                        window.shutter.parts.map((part, k) =>
-                                                                                            <tr key={k}>
-                                                                                                <td>{part.count}</td>
-                                                                                                <td>{part.description}</td>
-                                                                                            </tr>
-                                                                                        )
+                                                                                        !window.shutter.isFinished &&
+                                                                                        <div>
+                                                                                            <button 
+                                                                                                type="button" 
+                                                                                                className="btn btn-primary btn-block"
+                                                                                                onClick={() => this.finishShutter(order._id, window.shutter.id)}
+                                                                                            >
+                                                                                                Finish job
+                                                                                            </button>
+                                                                                        </div>
                                                                                     }
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div>
-                                                                            {
-                                                                                !window.shutter.isFinished &&
-                                                                                <div>
-                                                                                    <button 
-                                                                                        type="button" 
-                                                                                        className="btn btn-primary btn-block"
-                                                                                        onClick={() => this.finishShutter(order._id, window.shutter.id)}
-                                                                                    >
-                                                                                        Finish job
-                                                                                    </button>
                                                                                 </div>
-                                                                            }
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+                                                                </React.Fragment>
+
                                                             }
-                                                        </React.Fragment>
+                                                            )
+                                                        }
 
-                                                    }
-                                                    )
-                                                }
-
-                                            </tbody>
-                                        </table>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                
                             </li>
                         )
                     }

@@ -10,6 +10,19 @@
 #shutterGutterApp .header-text {
   margin-bottom: 50px; }
 
+#shutterGutterApp .details-label {
+  margin-left: 10px;
+  margin-right: 10px; }
+
+#shutterGutterApp .invoice-form {
+  border: 1px solid lightblue;
+  padding: 10px 10px 0px 10px;
+  border-radius: 10px;
+  background-color: aliceblue; }
+
+#shutterGutterApp .margin-top-30 {
+  margin-top: 30px; }
+
 #shutterGutterApp #my-navbar .active-nav-link {
   color: #337ab7; }
 
