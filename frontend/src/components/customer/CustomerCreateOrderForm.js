@@ -415,7 +415,7 @@ export class CustomerCreateOrderForm extends Component {
                         <h3>Shutters 
                             {
                                 this.state.error.windowsSize === true &&
-                                <span className="errorDesc">(min 1 needed)</span>
+                                <span className="error-desc">(min 1 needed)</span>
                             }
                             :
                         </h3>
@@ -460,7 +460,7 @@ export class CustomerCreateOrderForm extends Component {
                                                     </div>
                                                     {
                                                         this.state.error.order.windows[i].width &&
-                                                        <div className="errorDesc">Invalid value!</div>
+                                                        <div className="error-desc">Invalid value!</div>
                                                     }
                                                 </div>
                                             </div>
@@ -489,7 +489,7 @@ export class CustomerCreateOrderForm extends Component {
                                                     </div>
                                                     {
                                                         this.state.error.order.windows[i].height &&
-                                                        <div className="errorDesc">Invalid value!</div>
+                                                        <div className="error-desc">Invalid value!</div>
                                                     }
                                                 </div>
                                             </div>
@@ -516,7 +516,7 @@ export class CustomerCreateOrderForm extends Component {
                                                 </select>
                                                 {
                                                     this.state.error.order.windows[i].shutter.color &&
-                                                    <div className="errorDesc">Invalid value!</div>
+                                                    <div className="error-desc">Invalid value!</div>
                                                 }
                                             </div>
                                         </td>
@@ -542,7 +542,7 @@ export class CustomerCreateOrderForm extends Component {
                                                 </select>
                                                 {
                                                     this.state.error.order.windows[i].shutter.material &&
-                                                    <div className="errorDesc">Invalid value!</div>
+                                                    <div className="error-desc">Invalid value!</div>
                                                 }
                                             </div>
                                         </td>
@@ -568,7 +568,7 @@ export class CustomerCreateOrderForm extends Component {
                                                 </select>
                                                 {
                                                     this.state.error.order.windows[i].shutter.type &&
-                                                    <div className="errorDesc">Invalid value!</div>
+                                                    <div className="error-desc">Invalid value!</div>
                                                 }
                                             </div>
                                         </td>

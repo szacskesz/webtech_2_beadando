@@ -210,7 +210,7 @@ export class CustomerDataForm extends Component {
                         />
                         {
                             this.state.error.customerData.name &&
-                            <div className="errorDesc">Invalid value!</div>
+                            <div className="error-desc">Invalid value!</div>
                         }
                     </div>
                 </div>
@@ -237,7 +237,7 @@ export class CustomerDataForm extends Component {
                         />
                         {
                             this.state.error.customerData.email &&
-                            <div className="errorDesc">Invalid value!</div>
+                            <div className="error-desc">Invalid value!</div>
                         }
                     </div>
                 </div>
@@ -264,7 +264,7 @@ export class CustomerDataForm extends Component {
                         />
                         {
                             this.state.error.customerData.address &&
-                            <div className="errorDesc">Invalid value!</div>
+                            <div className="error-desc">Invalid value!</div>
                         }
                     </div>
                 </div>

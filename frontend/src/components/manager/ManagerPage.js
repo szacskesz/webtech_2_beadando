@@ -193,7 +193,7 @@ export class ManagerPage extends Component {
                                                 <div>
                                                     <h3>Comment:</h3>
                                                 </div>
-                                                <div className={"commentField"}>
+                                                <div className={"comment-field"}>
                                                     {order.comment}
                                                 </div>
                                             </div>
