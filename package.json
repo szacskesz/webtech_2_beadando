@@ -1,8 +1,0 @@
-{
-  "name": "webtech-2-assignment",
-  "version": "1.0.0",
-  "scripts": {
-    "start": "",
-    "test": "mocha src/test/**/*.js --timeout 20000 --require mocha-steps --exit"
-  }
-}

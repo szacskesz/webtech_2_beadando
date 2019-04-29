@@ -212,7 +212,6 @@ export class ManagerPage extends Component {
                                                                 <th>Color</th>
                                                                 <th>Material</th>
                                                                 <th>Type</th>
-                                                                <th>Status</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -223,14 +222,16 @@ export class ManagerPage extends Component {
                                                                         <td>{window.shutter.color}</td>
                                                                         <td>{window.shutter.material}</td>
                                                                         <td>{window.shutter.type}</td>
-                                                                        <td>{orderStatus}</td>
                                                                     </tr>
                                                                 )
                                                             }
-
                                                         </tbody>
                                                     </table>
                                                 </div>
+                                            </div>
+
+                                            <div>
+                                                <div><label className="status-label"><h3>Order status: </h3></label><span style={{fontSize: "1.2em"}}>{orderStatus}</span></div>
                                             </div>
 
                                             {

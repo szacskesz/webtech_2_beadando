@@ -14,6 +14,21 @@
   margin-left: 10px;
   margin-right: 10px; }
 
+#shutterGutterApp .status-label {
+  margin-right: 10px; }
+
+#shutterGutterApp .fa-user {
+  color: #337ab7;
+  margin-right: 5px; }
+
+#shutterGutterApp .fa-hard-hat {
+  color: #ecab14;
+  margin-right: 5px; }
+
+#shutterGutterApp .fa-user-tie {
+  color: black;
+  margin-right: 5px; }
+
 #shutterGutterApp .invoice-form {
   border: 1px solid lightblue;
   padding: 10px 10px 0px 10px;

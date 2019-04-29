@@ -10,7 +10,6 @@ class App extends Component {
       <div id="shutterGutterApp">
         <Router>
           <div>
-
             <nav className="navbar navbar-default" id="my-navbar">
               <div className="container-fluid">
                 <div className="navbar-header">
@@ -18,13 +17,13 @@ class App extends Component {
                 </div>
                 <ul className="nav navbar-nav">
                   <li>
-                    <NavLink to="/customer" activeClassName="active-nav-link"><i class="fas fa-user" style={{color: "#337ab7", marginRight: "5px"}}></i>Costumer page</NavLink>
+                    <NavLink to="/customer" activeClassName="active-nav-link"><i className="fas fa-user" />Costumer page</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/worker" activeClassName="active-nav-link"><i class="fas fa-hard-hat" style={{color: "#ecab14", marginRight: "5px"}}></i>Worker page</NavLink>
+                    <NavLink to="/worker" activeClassName="active-nav-link"><i className="fas fa-hard-hat" />Worker page</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/manager" activeClassName="active-nav-link"><i class="fas fa-user-tie" style={{color: "black", marginRight: "5px"}}></i>Manager page</NavLink>
+                    <NavLink to="/manager" activeClassName="active-nav-link"><i className="fas fa-user-tie" />Manager page</NavLink>
                   </li>
                 </ul>
               </div>
