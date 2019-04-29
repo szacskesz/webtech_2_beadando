@@ -97,7 +97,7 @@ export class CreateInvoiceForm extends Component {
                             />
                             {
                                 this.state.error.invoice.price &&
-                                <div className="errorDesc">Invalid value!</div>
+                                <div className="error-desc">Invalid value!</div>
                             }
                         </div>
                     </div>

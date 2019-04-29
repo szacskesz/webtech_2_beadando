@@ -10112,7 +10112,7 @@ readers do not read off random characters that represent icons */
 .fab {
   font-family: 'Font Awesome 5 Brands'; }
 
-#shutterGutterApp .errorDesc {
+#shutterGutterApp .error-desc {
   color: #a94442; }
 
 #shutterGutterApp .has-error {
@@ -10164,7 +10164,7 @@ readers do not read off random characters that represent icons */
 #shutterGutterApp .no-top-border {
   border-top: none; }
 
-#shutterGutterApp .commentField {
+#shutterGutterApp .comment-field {
   overflow-y: scroll;
   background-color: lightgrey;
   height: 150px;
