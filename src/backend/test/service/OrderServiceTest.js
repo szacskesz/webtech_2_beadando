@@ -229,11 +229,7 @@ describe('OrderService tests', () => {
 
         const dao = {
             createOrder : function(order, successC, errorC) {
-                try{
-                    assert.deepEqual(order.windows[0].shutter.parts[0].count, 10);
-                } catch {
-                    assert.fail();
-                }
+                assert.deepEqual(order.windows[0].shutter.parts[0].count, 10);
             }
         }
         const orderService = new OrderService(dao);
@@ -270,11 +266,7 @@ describe('OrderService tests', () => {
 
         const dao = {
             createOrder : function(order, successC, errorC) {
-                try{
-                    assert.deepEqual(order.windows[0].shutter.parts[1].count, 2);
-                } catch {
-                    assert.fail();
-                }
+                assert.deepEqual(order.windows[0].shutter.parts[1].count, 2);
             }
         }
         const orderService = new OrderService(dao);
@@ -311,12 +303,7 @@ describe('OrderService tests', () => {
 
         const dao = {
             createOrder : function(order, successC, errorC) {
-                try{
-                    assert.deepEqual(order.windows[0].shutter.parts[0].description,
-                        "200mm wide, white plastic rod");
-                } catch {
-                    assert.fail();
-                }
+                assert.deepEqual(order.windows[0].shutter.parts[0].description, "200mm wide, white plastic rod");
             }
         }
         const orderService = new OrderService(dao);
@@ -353,11 +340,7 @@ describe('OrderService tests', () => {
 
         const dao = {
             createOrder : function(order, successC, errorC) {
-                try{
-                    assert.deepEqual(order.windows[0].shutter.parts[1].description, "Rope");
-                } catch {
-                    assert.fail();
-                }
+                assert.deepEqual(order.windows[0].shutter.parts[1].description, "Rope");
             }
         }
         const orderService = new OrderService(dao);
@@ -394,13 +377,9 @@ describe('OrderService tests', () => {
 
         const dao = {
             createOrder : function(order, successC, errorC) {
-                try{
-                    assert.deepEqual(order.windows[0].shutter.parts.length, 3);
-                    assert.deepEqual(order.windows[0].shutter.parts[2].count, 1)
-                    assert.deepEqual(order.windows[0].shutter.parts[2].description, "Bug-screen")
-                } catch {
-                    assert.fail();
-                }
+                assert.deepEqual(order.windows[0].shutter.parts.length, 3);
+                assert.deepEqual(order.windows[0].shutter.parts[2].count, 1);
+                assert.deepEqual(order.windows[0].shutter.parts[2].description, "Bug-screen");
             }
         }
         const orderService = new OrderService(dao);
