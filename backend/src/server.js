@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 
 const orderController = require("./controller/OrderController").routes;
 const shutterDataController = require("./controller/ShutterDataController").routes;
-const connectToDatabase = require('./database/DatabaseConnection').connectToDatabase;
+const initDatabase = require('./database/InitDatabase').initDatabase;
 
 var app = express();
 app.use(bodyParser.json());
@@ -21,7 +21,7 @@ app.listen(8080, () => {
     console.log("App is listening on port 8080");
 })
 
-connectToDatabase();
+initDatabase();
 
 // export for testing
 module.exports = app;
