@@ -1,6 +1,6 @@
 const MongoClient = require('mongodb').MongoClient;
 const url = "mongodb://localhost:27017";
-const dbName = 'wetbech2_assignment';       // Database name
+const dbName = 'webtech2_assignment';       // Database name
 
 var databaseConnection;
 
