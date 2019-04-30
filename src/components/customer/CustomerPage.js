@@ -28,7 +28,7 @@ export class CustomerPage extends Component {
                     {
                         (this.state.customerData === undefined)
                         ? <CustomerDataForm setCustomerData={this.setCustomerData} />
-                        : <CustomerMainPage customerData={this.state.customerData}  />
+                        : <CustomerMainPage customerData={this.state.customerData} />
                     }
                 </div>
             </React.Fragment>
