@@ -106,10 +106,10 @@ async function initOrders() {
                         },
                         invoice: {
                             price: 149000,
-                            isPaid: false
+                            isPaid: true
                         },
                         comment: "No comment",
-                        isInstalled: false,
+                        isInstalled: true,
                         windows: [  
                             {
                                 width: 200,
@@ -141,10 +141,6 @@ async function initOrders() {
                             email: "kispal@mail.com",
                             address: "3525 Msikolc Hősök tere 1."
                         },
-                        invoice: {
-                            price: 149000,
-                            isPaid: false
-                        },
                         comment: "No comment",
                         isInstalled: false,
                         windows: [  
@@ -153,39 +149,6 @@ async function initOrders() {
                                 height: 300,
                                 shutter: {
                                     id: 2,
-                                    color: "white",
-                                    material: "plastic",
-                                    type: "basic",
-                                    parts: [
-                                        {
-                                            count: 30,
-                                            description: "200mm wide, white plastic rod"
-                                        },
-                                        {
-                                            count: 2,
-                                            description: "Rope"
-                                        }
-                                    ],
-                                    isFinished: false
-                                }
-                            }
-                        ]
-                    },
-                
-                    {
-                        customerData:  {
-                            name: "Kis János",
-                            email: "kisjanos@mail.com",
-                            address: "3525 Msikolc Hősök tere 2."
-                        },
-                        comment: "No comment",
-                        isInstalled: false,
-                        windows: [  
-                            {
-                                width: 200,
-                                height: 300,
-                                shutter: {
-                                    id: 3,
                                     color: "white",
                                     material: "plastic",
                                     type: "basic",
