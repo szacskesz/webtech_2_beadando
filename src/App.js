@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Redirect, NavLink } from "react-router-dom";
+import { Route, Redirect, NavLink, HashRouter } from "react-router-dom";
 import { CustomerPage } from "./components/customer/CustomerPage"
 import { WorkerPage } from "./components/worker/WorkerPage"
 import { ManagerPage } from "./components/manager/ManagerPage"
@@ -8,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <div id="shutterGutterApp">
-        <Router>
+        <HashRouter>
           <div>
             <nav className="navbar navbar-default" id="my-navbar">
               <div className="container-fluid">
@@ -36,7 +36,7 @@ class App extends Component {
             <Route path="/manager" component={ManagerPage} />
 
           </div>
-        </Router>
+        </HashRouter>
       </div>
     );
   }
