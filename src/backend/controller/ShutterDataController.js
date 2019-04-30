@@ -5,25 +5,25 @@ const shutterDataService = new ShutterDataService();
 
 routes.get("/getAllShutterMaterials", (req, resp) => {
     shutterDataService.getAllShutterMaterials((materials) => {
-        resp.status(200).send({"materials": materials});
+        resp.status(200).contentType("application/json").send({"materials": materials});
     }, (error) => {
-        resp.status(400).send({"error": error});
+        resp.status(400).contentType("application/json").send({"error": error});
     });
 })
 
 routes.get("/getAllShutterTypes", (req, resp) => {
     shutterDataService.getAllShutterTypes((types) => {
-        resp.status(200).send({"types": types});
+        resp.status(200).contentType("application/json").send({"types": types});
     }, (error) => {
-        resp.status(400).send({"error": error});
+        resp.status(400).contentType("application/json").send({"error": error});
     });
 })
 
 routes.get("/getAllShutterColors", (req, resp) => {
     shutterDataService.getAllShutterColors((colors) => {
-        resp.status(200).send({"colors": colors});
+        resp.status(200).contentType("application/json").send({"colors": colors});
     }, (error) => {
-        resp.status(400).send({"error": error});
+        resp.status(400).contentType("application/json").send({"error": error});
     });
 })
 
