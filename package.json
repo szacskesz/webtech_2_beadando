@@ -17,9 +17,8 @@
     "winston": "3.2.1"
   },
   "scripts": {
-    "build-css": "node-sass --include-path scss src/scss/style.scss public/css/style.css",
     "start-backend": "node src/backend/server.js",
-    "start-frontend": "npm run build-css && react-scripts start",
+    "start-frontend": "react-scripts start",
     "start-windows": "START /B npm run start-backend && npm run start-frontend",
     "start-linux": "npm run start-backend & npm run start-frontend",
     "start": "npm run start-windows",
