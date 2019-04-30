@@ -11,19 +11,15 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "express": "4.16.4",
+    "path": "0.12.7",
     "body-parser": "1.18.3",
     "mongodb": "3.1.13",
     "assert": "1.4.1",
     "winston": "3.2.1"
   },
   "scripts": {
-    "start-backend": "node src/backend/server.js",
-    "start-frontend": "react-scripts start",
-    "start-windows": "START /B npm run start-backend && npm run start-frontend",
-    "start-linux": "npm run start-backend & npm run start-frontend",
-    "start": "npm run start-windows",
-    "test-backend": "mocha src/backend/test/**/*.js --timeout 20000 --require mocha-steps --exit",
-    "test": "npm run test-backend"
+    "start": "react-scripts build && node src/backend/server.js",
+    "test": "mocha src/backend/test/**/*.js --timeout 20000 --require mocha-steps --exit && react-scripts test"
   },
   "eslintConfig": {
     "extends": "react-app"
