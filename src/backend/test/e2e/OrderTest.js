@@ -44,7 +44,6 @@ describe("Order e2e tests", () => {
                 assert.equal(res.status, 200);
                 assert.typeOf(res.body, 'object');
                 assert.typeOf(res.body.orders, 'array');
-                assert.isAbove(res.body.orders.length, 0);
 
                 for (let i = 0; i < res.body.orders.length; i++) {
                     try {

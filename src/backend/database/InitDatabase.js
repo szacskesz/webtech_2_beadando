@@ -32,7 +32,7 @@ async function initShutterColors() {
                 ],
                 (err,response) => {
                     assert.equal(null, err, err);
-                    assert.equal(6, response.insertedCount, "Could not insert order");
+                    assert.equal(6, response.insertedCount, "Could not insert all shutter colors");
                 })
         }
     });
@@ -59,7 +59,7 @@ async function initShutterMaterials() {
                 ],
                 (err,response) => {
                     assert.equal(null, err, err);
-                    assert.equal(3, response.insertedCount, "Could not insert order");
+                    assert.equal(3, response.insertedCount, "Could not insert all shutter materials");
                 })
         }
     });
@@ -83,7 +83,7 @@ async function initShutterTypes() {
                 ],
                 (err,response) => {
                     assert.equal(null, err, err);
-                    assert.equal(2, response.insertedCount, "Could not insert order");
+                    assert.equal(2, response.insertedCount, "Could not insert all shutter types");
                 })
         }
     });
@@ -170,7 +170,7 @@ async function initOrders() {
                 ],
                 (err,response) => {
                     assert.equal(null, err, err);
-                    assert.equal(3, response.insertedCount, "Could not insert all orders");
+                    assert.equal(2, response.insertedCount, "Could not insert all orders");
                 })
         }
     });
