@@ -15,7 +15,7 @@
         "preinstall": "cd client && npm install && cd ..",
         "prestart": "cd client && npm run build && cd ..",
         "start": "node server/server.js",
-        "test": "mocha test/**/*.js --timeout 20000 --require mocha-steps --exit",
+        "test": "mocha src/test/**/*.js --timeout 20000 --require mocha-steps --exit",
         "posttest": "cd client && npm test && cd .."
     },
     "devDependencies": {
