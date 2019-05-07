@@ -2,9 +2,9 @@ const express = require("express");
 const path = require('path');
 const bodyParser = require("body-parser");
 
-const orderController = require("./controller/OrderController").routes;
-const shutterDataController = require("./controller/ShutterDataController").routes;
-const initDatabase = require('./database/InitDatabase').initDatabase;
+const orderController = require("./src/controller/OrderController").routes;
+const shutterDataController = require("./src/controller/ShutterDataController").routes;
+const initDatabase = require('./src/database/InitDatabase').initDatabase;
 
 var app = express();
 app.use(bodyParser.json());
