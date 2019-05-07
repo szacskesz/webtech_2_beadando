@@ -14,7 +14,7 @@ export class CustomerMainPage extends Component {
     }
 
     componentDidMount() {
-        axios.post("http://localhost:8080/order/getAllOrdersByEmail", {
+        axios.post("/order/getAllOrdersByEmail", {
             "email": this.props.customerData.email
         })
         .then((response) => {
@@ -47,11 +47,11 @@ export class CustomerMainPage extends Component {
             }
         }
 
-        axios.post("http://localhost:8080/order/createOrder", data)
+        axios.post("/order/createOrder", data)
         .then((response) => {
             
             let id = response.data.createdId;
-            axios.post("http://localhost:8080/order/getOrderById", {
+            axios.post("/order/getOrderById", {
                 "orderId": id
             })
             .then((response) => {

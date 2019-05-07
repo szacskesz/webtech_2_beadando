@@ -17,7 +17,7 @@ export class WorkerPage extends Component {
     }
 
     componentDidMount() {
-        axios.get("http://localhost:8080/order/getAllOrders")
+        axios.get("/order/getAllOrders")
         .then((response) => {
             this.setState((prevState) => ({
                 ...prevState,
@@ -32,7 +32,7 @@ export class WorkerPage extends Component {
             shutterId: shutterId
         }
 
-        axios.post("http://localhost:8080/order/finishShutter", data)
+        axios.post("/order/finishShutter", data)
         .then((response) => {
             let orders = [...this.state.allOrders];
             orders.forEach((order) => {

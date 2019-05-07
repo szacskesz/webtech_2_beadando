@@ -2,7 +2,6 @@
   "name": "webtech-2-assignment",
   "version": "1.0.0",
   "private": true,
-  "proxy": "http://localhost:8080",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.8.1",
     "axios": "^0.18.0",

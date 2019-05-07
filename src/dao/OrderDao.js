@@ -1,12 +1,11 @@
 const ObjectID = require('mongodb').ObjectID;
 const assert = require('assert');
-
+const DatabaseConstants = require('../database/DatabaseConstants');
 const getDatabaseConnection = require('../database/DatabaseConnection').getDatabaseConnection;
-const collectionName = 'orders'
 
 async function getAllOrders(successCallback, errorCallback) {
     const db = await getDatabaseConnection();
-    const collection = db.collection(collectionName)
+    const collection = db.collection(DatabaseConstants.collections.orders)
 
     collection.find().toArray((err, orders) => {
         try {
@@ -21,7 +20,7 @@ async function getAllOrders(successCallback, errorCallback) {
 
 async function getAllOrdersByEmail(email, successCallback, errorCallback) {
     const db = await getDatabaseConnection();
-    const collection = db.collection(collectionName)
+    const collection = db.collection(DatabaseConstants.collections.orders)
 
     collection.find(
         {
@@ -40,7 +39,7 @@ async function getAllOrdersByEmail(email, successCallback, errorCallback) {
 
 async function getOrderById(orderId, successCallback, errorCallback) {
     const db = await getDatabaseConnection();
-    const collection = db.collection(collectionName)
+    const collection = db.collection(DatabaseConstants.collections.orders)
 
     collection.findOne(
         {
@@ -60,7 +59,7 @@ async function getOrderById(orderId, successCallback, errorCallback) {
 
 async function createOrder(order, successCallback, errorCallback) {
     const db = await getDatabaseConnection();
-    const collection = db.collection(collectionName)
+    const collection = db.collection(DatabaseConstants.collections.orders)
 
     collection.insertOne(order, (err,response) => {
         try {
@@ -76,7 +75,7 @@ async function createOrder(order, successCallback, errorCallback) {
 
 async function finishShutter(orderId, shutterId, successCallback, errorCallback) {
     const db = await getDatabaseConnection();
-    const collection = db.collection(collectionName)
+    const collection = db.collection(DatabaseConstants.collections.orders)
 
     collection.updateOne(
         {
@@ -104,7 +103,7 @@ async function finishShutter(orderId, shutterId, successCallback, errorCallback)
 
 async function finishInstallation(orderId, successCallback, errorCallback) {
     const db = await getDatabaseConnection();
-    const collection = db.collection(collectionName)
+    const collection = db.collection(DatabaseConstants.collections.orders)
 
     collection.updateOne(
         {
@@ -131,7 +130,7 @@ async function finishInstallation(orderId, successCallback, errorCallback) {
 
 async function createInvoiceForOrder(orderId, invoice, successCallback, errorCallback) {
     const db = await getDatabaseConnection();
-    const collection = db.collection(collectionName)
+    const collection = db.collection(DatabaseConstants.collections.orders)
 
     collection.updateOne(
         {

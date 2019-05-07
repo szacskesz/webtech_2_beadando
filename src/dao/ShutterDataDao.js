@@ -1,10 +1,10 @@
 const assert = require('assert');
-
+const DatabaseConstants = require('../database/DatabaseConstants');
 const getDatabaseConnection = require('../database/DatabaseConnection').getDatabaseConnection;
 
 async function getAllShutterColors(successCallback, errorCallback) {
     const db = await getDatabaseConnection();
-    const collection= db.collection("shutter_colors")
+    const collection= db.collection(DatabaseConstants.collections.shutterColors);
 
     collection.find().toArray((err, colors) => {
         try {
@@ -19,7 +19,7 @@ async function getAllShutterColors(successCallback, errorCallback) {
 
 async function getAllShutterMaterials(successCallback, errorCallback) {
     const db = await getDatabaseConnection();
-    const collection= db.collection("shutter_materials")
+    const collection= db.collection(DatabaseConstants.collections.shutterMaterials);
 
     collection.find().toArray((err, materials) => {
         try {
@@ -34,7 +34,7 @@ async function getAllShutterMaterials(successCallback, errorCallback) {
 
 async function getAllShutterTypes(successCallback, errorCallback) {
     const db = await getDatabaseConnection();
-    const collection= db.collection("shutter_types")
+    const collection= db.collection(DatabaseConstants.collections.shutterTypes);
 
     collection.find().toArray((err, types) => {
         try {

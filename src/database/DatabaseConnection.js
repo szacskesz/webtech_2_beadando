@@ -1,6 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
-const url = "mongodb://localhost:27017";
-const dbName = 'webtech2_assignment';       // Database name
+var DatabaseConstants = require('./DatabaseConstants');
 
 var databaseConnection;
 
@@ -10,11 +9,11 @@ const getDatabaseConnection = async () => {
     } else {
         try {
             const client = await MongoClient.connect(
-                url,
+                DatabaseConstants.url,
                 options={useNewUrlParser: true, auto_reconnect: true}
             );
 
-            databaseConnection = client.db(dbName);
+            databaseConnection = client.db(DatabaseConstants.dbName);
             console.log(`Connected to database successfully`)
         } catch (error) {
             console.error(`Failed to connect ${error.stack}`)

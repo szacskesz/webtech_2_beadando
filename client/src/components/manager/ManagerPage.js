@@ -16,7 +16,7 @@ export class ManagerPage extends Component {
     }
 
     componentDidMount() {
-        axios.get("http://localhost:8080/order/getAllOrders")
+        axios.get("/order/getAllOrders")
         .then((response) => {
             this.setState((prevState) => ({
                 ...prevState,
@@ -84,7 +84,7 @@ export class ManagerPage extends Component {
             orderId: orderId
         }
 
-        axios.post("http://localhost:8080/order/finishInstallation", data)
+        axios.post("/order/finishInstallation", data)
         .then((response) => {
             let orders = [...this.state.allOrders];
             orders.forEach((order) => {
@@ -109,7 +109,7 @@ export class ManagerPage extends Component {
             }
         }
 
-        axios.post("http://localhost:8080/order/createInvoiceForOrder", data)
+        axios.post("/order/createInvoiceForOrder", data)
         .then((response) => {
             let orders = [...this.state.allOrders];
             orders.forEach((order) => {

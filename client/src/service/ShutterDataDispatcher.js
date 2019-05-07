@@ -20,7 +20,7 @@ dispatcher.register((data)=> {
         return;
     }
 
-    axios.get("http://localhost:8080/shutter-data/getAllShutterColors")
+    axios.get("/shutter-data/getAllShutterColors")
     .then((response) => {
         ShutterDataStore._shutterData.colors = response.data.colors;
         ShutterDataStore.emitChange()
@@ -32,7 +32,7 @@ dispatcher.register((data)=> {
         return;
     }
 
-    axios.get("http://localhost:8080/shutter-data/getAllShutterTypes")
+    axios.get("/shutter-data/getAllShutterTypes")
     .then((response) => {
         ShutterDataStore._shutterData.types = response.data.types;
         ShutterDataStore.emitChange()
@@ -44,7 +44,7 @@ dispatcher.register((data)=> {
         return;
     }
 
-    axios.get("http://localhost:8080/shutter-data/getAllShutterMaterials")
+    axios.get("/shutter-data/getAllShutterMaterials")
     .then((response) => {
         ShutterDataStore._shutterData.materials = response.data.materials;
         ShutterDataStore.emitChange()
