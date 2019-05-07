@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import ShutterDataStore from "./../../service/ShutterDataStore"
+import ShutterDataActions from "./../../service/ShutterDataActions"
 
 export class CustomerCreateOrderForm extends Component {
 
@@ -6,6 +8,11 @@ export class CustomerCreateOrderForm extends Component {
         super(props);
 
         this.state = {
+            shutterData: {
+                colors: [],
+                types: [],
+                materials: []
+            },
             order: {
                 comment: "",
                 windows: []
@@ -17,6 +24,21 @@ export class CustomerCreateOrderForm extends Component {
                 }
             }
         };
+    }
+
+    onShutterDataChange = () => {
+        this.setState({shutterData : ShutterDataStore._shutterData});
+    }
+
+    componentDidMount() {
+        ShutterDataStore.addChangeListener(this.onShutterDataChange);
+        ShutterDataActions.refreshShutterColors();
+        ShutterDataActions.refreshShutterTypes();
+        ShutterDataActions.refreshShutterMaterials();
+    }
+
+    componentWillUnmount() {
+        ShutterDataStore.removeChangeListener(this.onShutterDataChange);
     }
 
     addNewShutter = () => {
@@ -243,8 +265,8 @@ export class CustomerCreateOrderForm extends Component {
         
         let found = false;
 
-        for (let j = 0; j < this.props.allShutterColor.length; j++) {
-            if(this.props.allShutterColor[j].color === color) {
+        for (let j = 0; j < this.state.shutterData.colors.length; j++) {
+            if(this.state.shutterData.colors[j].color === color) {
                 found = true;
             }
         }
@@ -281,8 +303,8 @@ export class CustomerCreateOrderForm extends Component {
         
         let found = false;
 
-        for (let j = 0; j < this.props.allShutterMaterials.length; j++) {
-            if(this.props.allShutterMaterials[j].material === material) {
+        for (let j = 0; j < this.state.shutterData.materials.length; j++) {
+            if(this.state.shutterData.materials[j].material === material) {
                 found = true;
             }
         }
@@ -319,8 +341,8 @@ export class CustomerCreateOrderForm extends Component {
         
         let found = false;
 
-        for (let j = 0; j < this.props.allShutterTypes.length; j++) {
-            if(this.props.allShutterTypes[j].type === type) {
+        for (let j = 0; j < this.state.shutterData.types.length; j++) {
+            if(this.state.shutterData.types[j].type === type) {
                 found = true;
             }
         }
@@ -509,7 +531,7 @@ export class CustomerCreateOrderForm extends Component {
                                                 >
                                                     <option disabled value={""}>Select a color</option>
                                                 {
-                                                    this.props.allShutterColor.map((color, i) =>
+                                                    this.state.shutterData.colors.map((color, i) =>
                                                         <option key={i} value={color.color}>{color.color}</option>
                                                     )
                                                 }
@@ -535,7 +557,7 @@ export class CustomerCreateOrderForm extends Component {
                                                 >
                                                     <option disabled value={""}>Select a material</option>
                                                 {
-                                                    this.props.allShutterMaterials.map((material, i) =>
+                                                    this.state.shutterData.materials.map((material, i) =>
                                                         <option key={i} value={material.material}>{material.material}</option>
                                                     )
                                                 }
@@ -561,7 +583,7 @@ export class CustomerCreateOrderForm extends Component {
                                                 >
                                                     <option disabled value={""}>Select a type</option>
                                                 {
-                                                    this.props.allShutterTypes.map((type, i) =>
+                                                    this.state.shutterData.types.map((type, i) =>
                                                         <option key={i} value={type.type}>{type.type}</option>
                                                     )
                                                 }

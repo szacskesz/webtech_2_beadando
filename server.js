@@ -19,9 +19,9 @@ app.use('/order/', orderController);
 app.use('/shutter-data/', shutterDataController);
 initDatabase();
 
-app.use(express.static('build'));
+app.use(express.static(path.join(__dirname, 'client', 'build')));
 app.get('/', function(req, res) {
-    res.sendFile(path.join('build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 });
 
 app.listen(8080, () => {

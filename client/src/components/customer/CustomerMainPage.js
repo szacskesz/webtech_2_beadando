@@ -9,38 +9,11 @@ export class CustomerMainPage extends Component {
         super(props);
 
         this.state = {
-            allShutterColors: [],
-            allShutterMaterials: [],
-            allShutterTypes: [],
             ownOrders: []
         };
     }
 
     componentDidMount() {
-        axios.get("http://localhost:8080/shutter-data/getAllShutterColors")
-        .then((response) => {
-            this.setState((prevState) => ({
-                ...prevState,
-                allShutterColors: response.data.colors
-            }))
-        })
-
-        axios.get("http://localhost:8080/shutter-data/getAllShutterMaterials")
-        .then((response) => {
-            this.setState((prevState) => ({
-                ...prevState,
-                allShutterMaterials: response.data.materials
-            }))
-        })
-
-        axios.get("http://localhost:8080/shutter-data/getAllShutterTypes")
-        .then((response) => {
-            this.setState((prevState) => ({
-                ...prevState,
-                allShutterTypes: response.data.types
-            }))
-        })
-
         axios.post("http://localhost:8080/order/getAllOrdersByEmail", {
             "email": this.props.customerData.email
         })
@@ -98,9 +71,6 @@ export class CustomerMainPage extends Component {
         return (
             <React.Fragment>
                 <CustomerCreateOrderForm
-                    allShutterColor={this.state.allShutterColors}
-                    allShutterMaterials={this.state.allShutterMaterials}
-                    allShutterTypes={this.state.allShutterTypes}
                     createOrderCallback={this.createOrder}
                 />
                 <hr />
