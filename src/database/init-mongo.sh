@@ -24,9 +24,9 @@ docker run --detach --network $MONGO_NETWORK_NAME --ip $MONGO_HOST_IP mongo
 
 chmod +r jsons/*.json
 
-mongoimport --host $MONGO_HOST_IP --db sakila --collection shutter_colors shutter_colors.json
-mongoimport --host $MONGO_HOST_IP --db sakila --collection shutter_materials shutter_materials.json
-mongoimport --host $MONGO_HOST_IP --db sakila --collection shutter_types shutter_types.json
-mongoimport --host $MONGO_HOST_IP --db sakila --collection orders orders.json
+mongoimport --host $MONGO_HOST_IP --db sakila --collection shutter_colors jsons/shutter_colors.json
+mongoimport --host $MONGO_HOST_IP --db sakila --collection shutter_materials jsons/shutter_materials.json
+mongoimport --host $MONGO_HOST_IP --db sakila --collection shutter_types jsons/shutter_types.json
+mongoimport --host $MONGO_HOST_IP --db sakila --collection orders jsons/orders.json
 
 mongo --host $MONGO_HOST_IP
