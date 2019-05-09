@@ -1,0 +1,92 @@
+$icon-font-path: "../../node_modules/bootstrap-sass/assets/fonts/bootstrap/";
+@import "../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+
+$fa-font-path: "../../node_modules/@fortawesome/fontawesome-free/webfonts/";
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/regular.scss";
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/brands.scss";
+
+#shutterGutterApp {
+
+    .header-icon {
+        font-size: 0.7em;
+        cursor: pointer;
+    }
+    
+    .error-desc {
+        color: #a94442;
+    }
+
+    .has-error {
+        border-color: #a94442;
+    }
+    
+    .text-center {
+        text-align: center;
+    }
+
+    .header-text {
+        margin-bottom: 50px;
+    }
+
+    .details-label {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .status-label {
+        margin-right: 10px;
+    }
+
+    .fa-user {
+        color: #337ab7;
+        margin-right: 5px;
+    }
+
+   .fa-hard-hat {
+        color: #ecab14;
+        margin-right: 5px;
+   }
+
+    .fa-user-tie {
+        color: black;
+        margin-right: 5px;
+    }
+
+    .invoice-form {
+        border: 1px solid lightblue;
+        padding: 10px 10px 0px 10px;
+        border-radius: 10px;
+        background-color: aliceblue;
+    }
+
+    .margin-top-30 {
+        margin-top: 30px;
+    }
+    
+    #my-navbar .active-nav-link {
+        color: #337ab7;
+    }
+    
+    .my-tr-row td {
+        padding: 10px 0 0 0;
+    }
+    
+    .my-tr-row td button {
+        border-radius: 0;
+    }
+
+    .no-top-border {
+        border-top: none;
+    }
+    
+    .comment-field {
+        overflow-y: scroll;
+        background-color: lightgrey;
+        height: 150px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid grey;
+    }
+}
