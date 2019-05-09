@@ -1,33 +1,17 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { CustomerOwnOrders } from "./CustomerOwnOrders";
 import { CustomerCreateOrderForm } from "./CustomerCreateOrderForm";
+import OrderActions from "./../../actions/OrderActions"
 
 export class CustomerMainPage extends Component {
 
     constructor(props) {
         super(props);
 
-        this.state = {
-            ownOrders: []
-        };
-    }
-
-    componentDidMount() {
-        axios.post("/order/getAllOrdersByEmail", {
-            "email": this.props.customerData.email
-        })
-        .then((response) => {
-            this.setState((prevState) => ({
-                ...prevState,
-                ownOrders: response.data.orders
-            }))
-        })
+        this.state = {};
     }
 
     createOrder = (order) => {
-
-
         let parsedWindows = [...order.windows];
         for (let i = 0; i < parsedWindows.length; i++) {
             parsedWindows[i].width = parseInt(parsedWindows[i].width);
@@ -38,43 +22,22 @@ export class CustomerMainPage extends Component {
             }
         }
 
-        let data = {
-            order: {
-                ...order,
-                isInstalled: false,
-                customerData: this.props.customerData,
-                windows: parsedWindows
-            }
+        const orderToCreate = {
+            ...order,
+            isInstalled: false,
+            customerData: this.props.customerData,
+            windows: parsedWindows
         }
 
-        axios.post("/order/createOrder", data)
-        .then((response) => {
-            
-            let id = response.data.createdId;
-            axios.post("/order/getOrderById", {
-                "orderId": id
-            })
-            .then((response) => {
-                this.setState((prevState) => ({
-                    ...prevState,
-                    ownOrders: [
-                        ...prevState.ownOrders,
-                        response.data.order
-                    ]
-                }))
-            })
-        })
-
+        OrderActions.createOrder(orderToCreate);
     }
 
     render() {
         return (
             <React.Fragment>
-                <CustomerCreateOrderForm
-                    createOrderCallback={this.createOrder}
-                />
+                <CustomerCreateOrderForm createOrderCallback={this.createOrder} />
                 <hr />
-                <CustomerOwnOrders customerData={this.props.customerData} ownOrders={this.state.ownOrders} />
+                <CustomerOwnOrders customerData={this.props.customerData} ownOrders={this.props.ownOrders} />
             </React.Fragment>
         )
     }

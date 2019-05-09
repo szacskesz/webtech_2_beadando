@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { CreateInvoiceForm } from "./CreateInvoiceForm";
 import { OrderStatistics } from "./OrderStatistics";
 import { getPriceFormattedString } from "../../util/price-format";
+import OrderStore from "./../../stores/OrderStore"
+import OrderActions from "./../../actions/OrderActions"
 
 export class ManagerPage extends Component {
 
@@ -10,19 +11,24 @@ export class ManagerPage extends Component {
         super(props);
 
         this.state = {
-            allOrders: [],
+            allOrders: OrderStore._allOrders,
             filter: ""
         };
     }
 
+    onAllOrdersChange = () => {
+        this.setState({allOrders : OrderStore._allOrders});
+    }
+
     componentDidMount() {
-        axios.get("/order/getAllOrders")
-        .then((response) => {
-            this.setState((prevState) => ({
-                ...prevState,
-                allOrders: response.data.orders
-            }))
-        })
+        OrderStore.addAllOrdersChangeListener(this.onAllOrdersChange);
+        if (OrderStore._isAllOrdersFecthed === false) {
+            OrderActions.refreshAllOrders();
+        }
+    }
+
+    componentWillUnmount() {
+        OrderStore.removeAllOrdersChangeListener(this.onAllOrdersChange);
     }
 
     setFilter = (event) => {
@@ -80,49 +86,16 @@ export class ManagerPage extends Component {
     }
 
     installShutters = (orderId) => {
-        let data = {
-            orderId: orderId
-        }
-
-        axios.post("/order/finishInstallation", data)
-        .then((response) => {
-            let orders = [...this.state.allOrders];
-            orders.forEach((order) => {
-                if(order._id === orderId) {
-                    order.isInstalled = true;
-                }
-            })
-
-            this.setState((prevState) => ({
-                ...prevState,
-                allOrders: orders
-            }))
-        })
+        OrderActions.finishInstallation(orderId);
     }
 
     createInvoiceForOrder = (invoice, orderId) => {
-        let data = {
-            orderId: orderId,
-            invoice: {
-                price: parseInt(invoice.price),
-                isPaid: invoice.isPaid
-            }
+        const invoiceToCreate = {
+            price: parseInt(invoice.price),
+            isPaid: invoice.isPaid
         }
 
-        axios.post("/order/createInvoiceForOrder", data)
-        .then((response) => {
-            let orders = [...this.state.allOrders];
-            orders.forEach((order) => {
-                if(order._id === orderId) {
-                    order.invoice = invoice;
-                }
-            })
-
-            this.setState((prevState) => ({
-                ...prevState,
-                allOrders: orders
-            }))
-        })
+        OrderActions.createInvoiceForOrder(orderId, invoiceToCreate);
     }
 
     render() {
@@ -131,7 +104,13 @@ export class ManagerPage extends Component {
             <div className="container-fluid">
                 
                 <div className="text-center header-text">
-                    <h1>Manager page</h1>
+                    <h1>
+                        Manager page
+                        <span>
+                            &nbsp;
+                            <i className="header-icon fas fa-sync" onClick={() => {OrderActions.refreshAllOrders();}} />
+                        </span>
+                    </h1>
                 </div>
 
                 <OrderStatistics allOrders={this.state.allOrders} />

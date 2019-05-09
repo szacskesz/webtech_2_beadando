@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import CostumerDataActions from "./../../actions/CostumerDataActions"
 
 export class CustomerDataForm extends Component {
 
@@ -180,7 +181,7 @@ export class CustomerDataForm extends Component {
     saveForm = (event) => {
         event.preventDefault();
         if(this.validateForm()) {
-            this.props.setCustomerData(this.state.customerData);
+            CostumerDataActions.setCostumerData(this.state.customerData)
         }
     }
 

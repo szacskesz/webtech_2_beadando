@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import ShutterDataStore from "./../../service/ShutterDataStore"
-import ShutterDataActions from "./../../service/ShutterDataActions"
+import ShutterDataStore from "./../../stores/ShutterDataStore"
+import ShutterDataActions from "./../../actions/ShutterDataActions"
 
 export class CustomerCreateOrderForm extends Component {
 
@@ -8,11 +8,9 @@ export class CustomerCreateOrderForm extends Component {
         super(props);
 
         this.state = {
-            shutterData: {
-                colors: [],
-                types: [],
-                materials: []
-            },
+            shutterColors: ShutterDataStore._shutterColors,
+            shutterTypes: ShutterDataStore._shutterTypes,
+            shutterMaterials: ShutterDataStore._shutterMaterials,
             order: {
                 comment: "",
                 windows: []
@@ -26,19 +24,40 @@ export class CustomerCreateOrderForm extends Component {
         };
     }
 
-    onShutterDataChange = () => {
-        this.setState({shutterData : ShutterDataStore._shutterData});
+    onShutterColorsChange = () => {
+        this.setState({shutterColors : ShutterDataStore._shutterColors});
+    }
+
+    onShutterTypesChange = () => {
+        this.setState({shutterTypes : ShutterDataStore._shutterTypes});
+    }
+
+    onShutterMaterialsChange = () => {
+        this.setState({shutterMaterials : ShutterDataStore._shutterMaterials});
     }
 
     componentDidMount() {
-        ShutterDataStore.addChangeListener(this.onShutterDataChange);
-        ShutterDataActions.refreshShutterColors();
-        ShutterDataActions.refreshShutterTypes();
-        ShutterDataActions.refreshShutterMaterials();
+        ShutterDataStore.addShutterColorsChangeListener(this.onShutterColorsChange);
+        ShutterDataStore.addShutterTypesChangeListener(this.onShutterTypesChange);
+        ShutterDataStore.addShutterMaterialsChangeListener(this.onShutterMaterialsChange);
+
+        if (this.state.shutterColors.length === 0) {
+            ShutterDataActions.refreshShutterColors();
+        }
+                
+        if (this.state.shutterTypes.length === 0) {
+            ShutterDataActions.refreshShutterTypes();
+        }
+                
+        if (this.state.shutterMaterials.length === 0) {
+            ShutterDataActions.refreshShutterMaterials();
+        }  
     }
 
     componentWillUnmount() {
-        ShutterDataStore.removeChangeListener(this.onShutterDataChange);
+        ShutterDataStore.removeShutterColorsChangeListener(this.onShutterColorsChange);
+        ShutterDataStore.removeShutterTypessChangeListener(this.onShutterTypesChange);
+        ShutterDataStore.removeShutterMaterialsChangeListener(this.onShutterMaterialsChange);
     }
 
     addNewShutter = () => {
@@ -265,8 +284,8 @@ export class CustomerCreateOrderForm extends Component {
         
         let found = false;
 
-        for (let j = 0; j < this.state.shutterData.colors.length; j++) {
-            if(this.state.shutterData.colors[j].color === color) {
+        for (let j = 0; j < this.state.shutterColors.length; j++) {
+            if(this.state.shutterColors[j].color === color) {
                 found = true;
             }
         }
@@ -303,8 +322,8 @@ export class CustomerCreateOrderForm extends Component {
         
         let found = false;
 
-        for (let j = 0; j < this.state.shutterData.materials.length; j++) {
-            if(this.state.shutterData.materials[j].material === material) {
+        for (let j = 0; j < this.state.shutterMaterials.length; j++) {
+            if(this.state.shutterMaterials[j].material === material) {
                 found = true;
             }
         }
@@ -341,8 +360,8 @@ export class CustomerCreateOrderForm extends Component {
         
         let found = false;
 
-        for (let j = 0; j < this.state.shutterData.types.length; j++) {
-            if(this.state.shutterData.types[j].type === type) {
+        for (let j = 0; j < this.state.shutterTypes.length; j++) {
+            if(this.state.shutterTypes[j].type === type) {
                 found = true;
             }
         }
@@ -531,7 +550,7 @@ export class CustomerCreateOrderForm extends Component {
                                                 >
                                                     <option disabled value={""}>Select a color</option>
                                                 {
-                                                    this.state.shutterData.colors.map((color, i) =>
+                                                    this.state.shutterColors.map((color, i) =>
                                                         <option key={i} value={color.color}>{color.color}</option>
                                                     )
                                                 }
@@ -557,7 +576,7 @@ export class CustomerCreateOrderForm extends Component {
                                                 >
                                                     <option disabled value={""}>Select a material</option>
                                                 {
-                                                    this.state.shutterData.materials.map((material, i) =>
+                                                    this.state.shutterMaterials.map((material, i) =>
                                                         <option key={i} value={material.material}>{material.material}</option>
                                                     )
                                                 }
@@ -583,7 +602,7 @@ export class CustomerCreateOrderForm extends Component {
                                                 >
                                                     <option disabled value={""}>Select a type</option>
                                                 {
-                                                    this.state.shutterData.types.map((type, i) =>
+                                                    this.state.shutterTypes.map((type, i) =>
                                                         <option key={i} value={type.type}>{type.type}</option>
                                                     )
                                                 }

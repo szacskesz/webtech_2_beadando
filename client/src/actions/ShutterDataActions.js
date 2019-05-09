@@ -1,7 +1,7 @@
-import ShutterDataConstants from './ShutterDataConstants'
-import ShutterDataDispatcher from './ShutterDataDispatcher'
+import ShutterDataConstants from '../constants/ShutterDataConstants'
+import ShutterDataDispatcher from '../dispatchers/ShutterDataDispatcher'
 
-class ShutterDataActions{
+class ShutterDataActions {
 
     refreshShutterColors() {
         ShutterDataDispatcher.handleViewAction({

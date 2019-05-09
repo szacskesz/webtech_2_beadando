@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import axios from "axios";
+import OrderStore from "./../../stores/OrderStore"
+import OrderActions from "./../../actions/OrderActions"
 
 export class WorkerPage extends Component {
 
@@ -7,7 +8,7 @@ export class WorkerPage extends Component {
         super(props);
 
         this.state = {
-            allOrders: [],
+            allOrders: OrderStore._allOrders,
             filterUnfinished: false,
             selectedShutter: {
                 orderId: undefined,
@@ -16,40 +17,23 @@ export class WorkerPage extends Component {
         };
     }
 
+    onAllOrdersChange = () => {
+        this.setState({allOrders : OrderStore._allOrders});
+    }
+
     componentDidMount() {
-        axios.get("/order/getAllOrders")
-        .then((response) => {
-            this.setState((prevState) => ({
-                ...prevState,
-                allOrders: response.data.orders
-            }))
-        })
+        OrderStore.addAllOrdersChangeListener(this.onAllOrdersChange);
+        if (OrderStore._isAllOrdersFecthed === false) {
+            OrderActions.refreshAllOrders();
+        }
+    }
+
+    componentWillUnmount() {
+        OrderStore.removeAllOrdersChangeListener(this.onAllOrdersChange);
     }
 
     finishShutter = (orderId, shutterId) => {
-        let data = {
-            orderId: orderId,
-            shutterId: shutterId
-        }
-
-        axios.post("/order/finishShutter", data)
-        .then((response) => {
-            let orders = [...this.state.allOrders];
-            orders.forEach((order) => {
-                if(order._id === orderId) {
-                    order.windows.forEach((window) => {
-                        if(window.shutter.id === shutterId) {
-                            window.shutter.isFinished = true;
-                        }
-                    })
-                }
-            })
-
-            this.setState((prevState) => ({
-                ...prevState,
-                allOrders: orders
-            }))
-        })
+        OrderActions.finishShutter(orderId, shutterId);
     }
 
     setSelectedShutter = (orderId, shutterId) => {
@@ -81,13 +65,16 @@ export class WorkerPage extends Component {
 
     render() {
         return (
-            <React.Fragment>
-            <div className="container-fluid">
-                
+            <div className="container-fluid"> 
                 <div className="text-center header-text">
-                    <h1>Worker page</h1>
+                    <h1>
+                        Worker page
+                        <span>
+                            &nbsp;
+                            <i className="header-icon fas fa-sync" onClick={() => {OrderActions.refreshAllOrders();}} />
+                        </span>
+                    </h1>
                 </div>
-
 
                 <div>
                     <h2>All orders</h2>
@@ -241,10 +228,7 @@ export class WorkerPage extends Component {
                     }
                     </ul>
                 </div>
-
-
             </div>
-            </React.Fragment>
         )
     }
 }

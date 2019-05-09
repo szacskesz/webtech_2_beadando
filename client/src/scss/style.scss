@@ -8,6 +8,11 @@ $fa-font-path: "../../node_modules/@fortawesome/fontawesome-free/webfonts/";
 @import "../../node_modules/@fortawesome/fontawesome-free/scss/brands.scss";
 
 #shutterGutterApp {
+
+    .header-icon {
+        font-size: 0.7em;
+        cursor: pointer;
+    }
     
     .error-desc {
         color: #a94442;
