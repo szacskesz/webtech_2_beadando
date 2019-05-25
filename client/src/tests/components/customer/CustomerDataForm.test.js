@@ -4,6 +4,6 @@ import { CustomerDataForm } from '../../../components/customer/CustomerDataForm'
 
 it('CustomerDataForm renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<CustomerDataForm />, div);
+  ReactDOM.render(<CustomerDataForm isOwnOrdersFetching={false} />, div);
   ReactDOM.unmountComponentAtNode(div);
 });

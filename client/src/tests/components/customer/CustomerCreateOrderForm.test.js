@@ -4,6 +4,6 @@ import { CustomerCreateOrderForm } from '../../../components/customer/CustomerCr
 
 it('CustomerCreateOrderForm renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<CustomerCreateOrderForm allShutterColor={[]} allShutterMaterials={[]} allShutterTypes={[]} createOrderCallback={ () => undefined } />, div);
+  ReactDOM.render(<CustomerCreateOrderForm customerData={{name: "", email: "", address: ""}} isOwnOrdersFetching={false} />, div);
   ReactDOM.unmountComponentAtNode(div);
 });

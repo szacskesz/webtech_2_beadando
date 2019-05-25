@@ -4,6 +4,12 @@ import { CreateInvoiceForm } from '../../../components/manager/CreateInvoiceForm
 
 it('CreateInvoiceForm renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<CreateInvoiceForm createInvoiceCallback={ () => undefined } />, div);
+  ReactDOM.render(
+    <CreateInvoiceForm
+      createInvoiceCallback={ () => undefined }
+      sAllOrdersFetching={false}
+    />,
+    div
+  );
   ReactDOM.unmountComponentAtNode(div);
 });
