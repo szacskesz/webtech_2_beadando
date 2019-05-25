@@ -12,6 +12,16 @@ $fa-font-path: "../../node_modules/@fortawesome/fontawesome-free/webfonts/";
     .header-icon {
         font-size: 0.7em;
         cursor: pointer;
+        
+        .disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+    }
+
+    .disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
     }
     
     .error-desc {

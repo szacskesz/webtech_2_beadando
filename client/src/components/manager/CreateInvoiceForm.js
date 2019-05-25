@@ -71,8 +71,6 @@ export class CreateInvoiceForm extends Component {
         }
     }
 
-
-
     render() {
         return (
             <div className="container-fluid invoice-form">
@@ -105,10 +103,13 @@ export class CreateInvoiceForm extends Component {
                     
                     <div className="form-group">        
                         <div className="col-sm-offset-1 col-sm-11">
-                            <button 
-                                type="submit" 
-                                
-                                className="btn btn-primary btn-block"
+                            <button
+                                type={this.props.isAllOrdersFetching ? 'button' : 'submit'}
+                                className={this.props.isAllOrdersFetching 
+                                    ? 'btn btn-primary btn-block disabled' 
+                                    : 'btn btn-primary btn-block'
+                                }
+                                disabled={this.props.isAllOrdersFetching}
                             >
                                 Create invoice
                             </button>

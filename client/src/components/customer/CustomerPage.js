@@ -11,7 +11,8 @@ export class CustomerPage extends Component {
 
         this.state = {
             customerData: CostumerDataStore._costumerData,
-            ownOrders: CostumerDataStore._ownOrders
+            ownOrders: CostumerDataStore._ownOrders,
+            isOwnOrdersFetching: false
         };
     }
 
@@ -20,7 +21,10 @@ export class CustomerPage extends Component {
     }
 
     onOwnOrdersChange = () => {
-        this.setState({ownOrders : CostumerDataStore._ownOrders});
+        this.setState({
+            ownOrders : CostumerDataStore._ownOrders,
+            isOwnOrdersFetching: CostumerDataStore._isOwnOrdersFetching
+        });
     }
 
     componentDidMount() {
@@ -44,7 +48,17 @@ export class CustomerPage extends Component {
                             {this.state.customerData !== undefined &&
                                 <span>
                                     &nbsp;
-                                    <i className="header-icon fas fa-sync" onClick={() => {CostumerDataActions.refreshCostumerOwnOrders();}} />
+                                    <i 
+                                        className={this.state.isOwnOrdersFetching
+                                            ? "header-icon fas fa-sync disabled"
+                                            : "header-icon fas fa-sync"
+                                        }
+                                        onClick={() => {
+                                            if (!this.state.isOwnOrdersFetching) {
+                                                CostumerDataActions.refreshCostumerOwnOrders();
+                                            }
+                                        }}
+                                    />
                                     &nbsp;
                                     <i className="header-icon fas fa-sign-out-alt" onClick={() => {CostumerDataActions.unsetCostumerData();}} />
                                 </span>
@@ -54,7 +68,11 @@ export class CustomerPage extends Component {
                     {
                         (this.state.customerData === undefined)
                         ? <CustomerDataForm />
-                        : <CustomerMainPage customerData={this.state.customerData} ownOrders={this.state.ownOrders} />
+                        : <CustomerMainPage
+                            customerData={this.state.customerData}
+                            ownOrders={this.state.ownOrders}
+                            isOwnOrdersFetching={this.state.isOwnOrdersFetching}
+                        />
                     }
                 </div>
             </React.Fragment>

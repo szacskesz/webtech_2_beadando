@@ -11,6 +11,9 @@ export class CustomerCreateOrderForm extends Component {
             shutterColors: ShutterDataStore._shutterColors,
             shutterTypes: ShutterDataStore._shutterTypes,
             shutterMaterials: ShutterDataStore._shutterMaterials,
+            isShutterColorsFetching: ShutterDataStore._isShutterColorsFetching,
+            isShutterTypesFetching: ShutterDataStore._isShutterTypesFetching,
+            isShutterMaterialsFetching: ShutterDataStore._isShutterMaterialsFetching,
             order: {
                 comment: "",
                 windows: []
@@ -25,15 +28,24 @@ export class CustomerCreateOrderForm extends Component {
     }
 
     onShutterColorsChange = () => {
-        this.setState({shutterColors : ShutterDataStore._shutterColors});
+        this.setState({
+            shutterColors : ShutterDataStore._shutterColors,
+            isShutterColorsFetching: ShutterDataStore._isShutterColorsFetching
+        });
     }
 
     onShutterTypesChange = () => {
-        this.setState({shutterTypes : ShutterDataStore._shutterTypes});
+        this.setState({
+            shutterTypes : ShutterDataStore._shutterTypes,
+            isShutterTypesFetching: ShutterDataStore._isShutterTypesFetching
+        });
     }
 
     onShutterMaterialsChange = () => {
-        this.setState({shutterMaterials : ShutterDataStore._shutterMaterials});
+        this.setState({
+            shutterMaterials : ShutterDataStore._shutterMaterials,
+            isShutterMaterialsFetching: ShutterDataStore._isShutterMaterialsFetching
+        });
     }
 
     componentDidMount() {
@@ -445,10 +457,8 @@ export class CustomerCreateOrderForm extends Component {
         }
     }
 
-
     render() {
         return (
-
             <form  onSubmit={(e) => this.saveForm(e)}>
                 <h2>Create order</h2>
                 <div>
@@ -653,7 +663,13 @@ export class CustomerCreateOrderForm extends Component {
                 </div>
 
                 <div className="form-group"> 
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <button
+                        type={this.props.isOwnOrdersFetching ? 'button' : 'submit'}
+                        className={this.props.isOwnOrdersFetching ? 'btn btn-primary disabled' : 'btn btn-primary'}
+                        disabled={this.props.isOwnOrdersFetching}
+                    >
+                        Submit
+                    </button>
                 </div>
             </form>
         )

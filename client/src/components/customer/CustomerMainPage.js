@@ -35,7 +35,7 @@ export class CustomerMainPage extends Component {
     render() {
         return (
             <React.Fragment>
-                <CustomerCreateOrderForm createOrderCallback={this.createOrder} />
+                <CustomerCreateOrderForm createOrderCallback={this.createOrder} isOwnOrdersFetching={this.props.isOwnOrdersFetching} />
                 <hr />
                 <CustomerOwnOrders customerData={this.props.customerData} ownOrders={this.props.ownOrders} />
             </React.Fragment>

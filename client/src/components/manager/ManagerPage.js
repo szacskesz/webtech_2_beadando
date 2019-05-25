@@ -12,17 +12,21 @@ export class ManagerPage extends Component {
 
         this.state = {
             allOrders: OrderStore._allOrders,
+            isAllOrdersFetching: OrderStore._isAllOrdersFetching,
             filter: ""
         };
     }
 
     onAllOrdersChange = () => {
-        this.setState({allOrders : OrderStore._allOrders});
+        this.setState({
+            allOrders : OrderStore._allOrders,
+            isAllOrdersFetching: OrderStore._isAllOrdersFetching
+        });
     }
 
     componentDidMount() {
         OrderStore.addAllOrdersChangeListener(this.onAllOrdersChange);
-        if (OrderStore._isAllOrdersFecthed === false) {
+        if (OrderStore._isAllOrdersFetched === false) {
             OrderActions.refreshAllOrders();
         }
     }
@@ -85,10 +89,6 @@ export class ManagerPage extends Component {
         })
     }
 
-    installShutters = (orderId) => {
-        OrderActions.finishInstallation(orderId);
-    }
-
     createInvoiceForOrder = (invoice, orderId) => {
         const invoiceToCreate = {
             price: parseInt(invoice.price),
@@ -108,7 +108,17 @@ export class ManagerPage extends Component {
                         Manager page
                         <span>
                             &nbsp;
-                            <i className="header-icon fas fa-sync" onClick={() => {OrderActions.refreshAllOrders();}} />
+                            <i 
+                                className={this.state.isAllOrdersFetching
+                                    ? "header-icon fas fa-sync disabled"
+                                    : "header-icon fas fa-sync"
+                                }
+                                onClick={() => {
+                                    if (!this.state.isAllOrdersFetching) {
+                                        OrderActions.refreshAllOrders();
+                                    }
+                                }}
+                            />
                         </span>
                     </h1>
                 </div>
@@ -217,8 +227,16 @@ export class ManagerPage extends Component {
                                                 (orderStatus === "ASSEMBLED") &&
                                                 <button 
                                                     type="button" 
-                                                    className="btn btn-primary btn-block"
-                                                    onClick={() => this.installShutters(order._id)}
+                                                    onClick={() => {
+                                                        if (!this.state.isAllOrdersFetching) {
+                                                            OrderActions.finishInstallation(order._id);
+                                                        }
+                                                    }}
+                                                    className={this.props.isAllOrdersFetching 
+                                                        ? 'btn btn-primary btn-block disabled' 
+                                                        : 'btn btn-primary btn-block'
+                                                    }
+                                                    disabled={this.props.isAllOrdersFetching}
                                                 >
                                                     Install shutter(s)
                                                 </button>
@@ -226,7 +244,10 @@ export class ManagerPage extends Component {
 
                                             {
                                                 (orderStatus === "INSTALLED") &&
-                                                <CreateInvoiceForm createInvoiceCallback={(invoice) => this.createInvoiceForOrder(invoice, order._id)} />
+                                                <CreateInvoiceForm
+                                                    createInvoiceCallback={(invoice) => this.createInvoiceForOrder(invoice, order._id)}
+                                                    isAllOrdersFetching={this.state.isAllOrdersFetching}
+                                                />
 
                                             }
 

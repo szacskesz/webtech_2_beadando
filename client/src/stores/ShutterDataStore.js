@@ -5,6 +5,10 @@ class ShutterDataStore extends EventEmitter {
     _shutterTypes = [];
     _shutterMaterials = [];
 
+    _isShutterColorsFetching = false;
+    _isShutterTypesFetching = false;
+    _isShutterMaterialsFetching = false;
+
     emitShutterColorsChange() {
         this.emit('shutter-colors-change');
     }

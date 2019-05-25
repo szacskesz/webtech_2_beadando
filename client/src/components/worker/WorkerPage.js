@@ -9,6 +9,7 @@ export class WorkerPage extends Component {
 
         this.state = {
             allOrders: OrderStore._allOrders,
+            isAllOrdersFetching: OrderStore._isAllOrdersFetching,
             filterUnfinished: false,
             selectedShutter: {
                 orderId: undefined,
@@ -18,22 +19,21 @@ export class WorkerPage extends Component {
     }
 
     onAllOrdersChange = () => {
-        this.setState({allOrders : OrderStore._allOrders});
+        this.setState({
+            allOrders : OrderStore._allOrders,
+            isAllOrdersFetching : OrderStore._isAllOrdersFetching
+        });
     }
 
     componentDidMount() {
         OrderStore.addAllOrdersChangeListener(this.onAllOrdersChange);
-        if (OrderStore._isAllOrdersFecthed === false) {
+        if (OrderStore._isAllOrdersFetched === false) {
             OrderActions.refreshAllOrders();
         }
     }
 
     componentWillUnmount() {
         OrderStore.removeAllOrdersChangeListener(this.onAllOrdersChange);
-    }
-
-    finishShutter = (orderId, shutterId) => {
-        OrderActions.finishShutter(orderId, shutterId);
     }
 
     setSelectedShutter = (orderId, shutterId) => {
@@ -71,7 +71,17 @@ export class WorkerPage extends Component {
                         Worker page
                         <span>
                             &nbsp;
-                            <i className="header-icon fas fa-sync" onClick={() => {OrderActions.refreshAllOrders();}} />
+                            <i 
+                                className={this.state.isAllOrdersFetching
+                                    ? "header-icon fas fa-sync disabled"
+                                    : "header-icon fas fa-sync"
+                                }
+                                onClick={() => {
+                                    if (!this.state.isAllOrdersFetching) {
+                                        OrderActions.refreshAllOrders();
+                                    }
+                                }}
+                            />
                         </span>
                     </h1>
                 </div>
@@ -200,8 +210,15 @@ export class WorkerPage extends Component {
                                                                                         <div>
                                                                                             <button 
                                                                                                 type="button" 
-                                                                                                className="btn btn-primary btn-block"
-                                                                                                onClick={() => this.finishShutter(order._id, window.shutter.id)}
+                                                                                                className={this.state.isAllOrdersFetching
+                                                                                                    ? 'btn btn-primary btn-block disabled'
+                                                                                                    : 'btn btn-primary btn-block'
+                                                                                                }
+                                                                                                onClick={() => {
+                                                                                                    if (!this.state.isAllOrdersFetching) {
+                                                                                                        OrderActions.finishShutter(order._id, window.shutter.id);
+                                                                                                    } 
+                                                                                                }}
                                                                                             >
                                                                                                 Finish job
                                                                                             </button>
