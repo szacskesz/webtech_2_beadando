@@ -27,6 +27,9 @@ dispatcher.register((data) => {
     .then((response) => {
         ShutterDataStore._shutterColors = response.data.colors;
     })
+    .catch((error) => {
+        alert(error);
+    })
     .finally(() => {
         ShutterDataStore._isShutterColorsFetching = false;
         ShutterDataStore.emitShutterColorsChange()
@@ -45,6 +48,9 @@ dispatcher.register((data) => {
     .then((response) => {
         ShutterDataStore._shutterTypes = response.data.types;  
     })
+    .catch((error) => {
+        alert(error);
+    })
     .finally(() => {
         ShutterDataStore._isShutterTypesFetching = false;
         ShutterDataStore.emitShutterTypesChange()
@@ -62,6 +68,9 @@ dispatcher.register((data) => {
     axios.get("/shutter-data/getAllShutterMaterials")
     .then((response) => {
         ShutterDataStore._shutterMaterials = response.data.materials;
+    })
+    .catch((error) => {
+        alert(error);
     })
     .finally(() => {
         ShutterDataStore._isShutterMaterialsFetching = false;

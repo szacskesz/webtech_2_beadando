@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ShutterDataStore from "./../../stores/ShutterDataStore"
 import ShutterDataActions from "./../../actions/ShutterDataActions"
+import OrderActions from "./../../actions/OrderActions"
 
 export class CustomerCreateOrderForm extends Component {
 
@@ -441,19 +442,38 @@ export class CustomerCreateOrderForm extends Component {
     saveForm = (event) => {
         event.preventDefault();
         if(this.validateForm()) {
-            this.props.createOrderCallback(this.state.order);
-            this.setState({
-                order: {
-                    comment: "",
-                    windows: []
-                },
-                error: {
-                    windowsSize: undefined,
-                    order: {
-                        windows: []
-                    }
+            const order = this.state.order;
+            let parsedWindows = [...order.windows];
+            for (let i = 0; i < parsedWindows.length; i++) {
+                parsedWindows[i].width = parseInt(parsedWindows[i].width);
+                parsedWindows[i].height = parseInt(parsedWindows[i].height);
+                parsedWindows[i].shutter = {
+                    ...parsedWindows[i].shutter,
+                    isFinished: false
                 }
-            })
+            }
+    
+            const orderToCreate = {
+                ...order,
+                isInstalled: false,
+                customerData: this.props.customerData,
+                windows: parsedWindows
+            }
+    
+            OrderActions.createOrder(orderToCreate, () => {
+                this.setState({
+                    order: {
+                        comment: "",
+                        windows: []
+                    },
+                    error: {
+                        windowsSize: undefined,
+                        order: {
+                            windows: []
+                        }
+                    }
+                })
+            });
         }
     }
 

@@ -27,7 +27,7 @@ dispatcher.register((data) => {
     OrderStore.emitAllOrdersChange();
 
     axios.post("/order/createOrder", {
-        "order": data.action.payload
+        "order": data.action.payload.order
     })
     .then((response) => {
         
@@ -39,14 +39,19 @@ dispatcher.register((data) => {
             CostumerDataStore._ownOrders = [...CostumerDataStore._ownOrders, response.data.order];
             OrderStore._allOrders = [...OrderStore._allOrders, response.data.order];
         })
+        .catch((error) => {
+            alert(error);
+        })
         .finally(() => {
             CostumerDataStore._isOwnOrdersFetching = false;
             CostumerDataStore.emitOwnOrdersChange();
             OrderStore._isAllOrdersFetching = false;
             OrderStore.emitAllOrdersChange();
+            data.action.payload.successCallback();
         })
     })
     .catch((error) => {
+        alert(error);
         CostumerDataStore._isOwnOrdersFetching = false;
         CostumerDataStore.emitOwnOrdersChange();
         OrderStore._isAllOrdersFetching = false;
@@ -67,6 +72,9 @@ dispatcher.register((data) => {
     .then((response) => {
         OrderStore._allOrders = response.data.orders;
         OrderStore._isAllOrdersFetched = true;
+    })
+    .catch((error) => {
+        alert(error);
     })
     .finally(() => {
         OrderStore._isAllOrdersFetching = false;
@@ -115,6 +123,9 @@ dispatcher.register((data) => {
 
         CostumerDataStore._ownOrders = ownOrders;
     })
+    .catch((error) => {
+        alert(error);
+    })
     .finally(() => {
         CostumerDataStore._isOwnOrdersFetching = false;
         CostumerDataStore.emitOwnOrdersChange();
@@ -154,6 +165,9 @@ dispatcher.register((data) => {
         })
 
         CostumerDataStore._ownOrders = ownOrders;
+    })
+    .catch((error) => {
+        alert(error);
     })
     .finally(() => {
         CostumerDataStore._isOwnOrdersFetching = false;
@@ -195,6 +209,9 @@ dispatcher.register((data) => {
         })
 
         CostumerDataStore._ownOrders = ownOrders;
+    })
+    .catch((error) => {
+        alert(error);
     })
     .finally(() => {
         CostumerDataStore._isOwnOrdersFetching = false;

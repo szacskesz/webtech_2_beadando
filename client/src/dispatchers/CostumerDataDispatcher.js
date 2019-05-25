@@ -30,6 +30,9 @@ dispatcher.register((data) => {
         CostumerDataStore._costumerData = data.action.payload;
         CostumerDataStore._ownOrders = response.data.orders;
     })
+    .catch((error) => {
+        alert(error);
+    })
     .finally(() => {
         CostumerDataStore._isOwnOrdersFetching = false;
         CostumerDataStore.emitCostumerDataChange();
@@ -61,6 +64,9 @@ dispatcher.register((data) => {
     })
     .then((response) => {
         CostumerDataStore._ownOrders = response.data.orders;
+    })
+    .catch((error) => {
+        alert(error);
     })
     .finally(() => {
         CostumerDataStore._isOwnOrdersFetching = false;

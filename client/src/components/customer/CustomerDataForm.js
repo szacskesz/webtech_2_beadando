@@ -272,7 +272,13 @@ export class CustomerDataForm extends Component {
 
                 <div className="form-group"> 
                     <div className="col-sm-offset-1 col-sm-11">
-                        <button type="submit" className="btn btn-primary">Submit</button>
+                        <button
+                            type={this.props.isOwnOrdersFetching ? 'button' : 'submit'}
+                            className={this.props.isOwnOrdersFetching ? 'btn btn-primary disabled' : 'btn btn-primary'}
+                            disabled={this.props.isOwnOrdersFetching}
+                        >
+                            Submit
+                        </button>
                     </div>
                 </div>
             </form>

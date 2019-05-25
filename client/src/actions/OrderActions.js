@@ -3,10 +3,13 @@ import OrderDispatcher from '../dispatchers/OrderDispatcher'
 
 class OrderActions {
 
-    createOrder(order) {
+    createOrder(order, successCallback) {
         OrderDispatcher.handleViewAction({
             actionType : OrderConstants.CREATE_ORDER,
-            payload : order
+            payload : {
+                order: order,
+                successCallback: successCallback
+            }
         })
     }
 

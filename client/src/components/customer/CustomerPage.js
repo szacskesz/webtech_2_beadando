@@ -67,7 +67,9 @@ export class CustomerPage extends Component {
                     </div>
                     {
                         (this.state.customerData === undefined)
-                        ? <CustomerDataForm />
+                        ? <CustomerDataForm
+                            isOwnOrdersFetching={this.state.isOwnOrdersFetching}
+                        />
                         : <CustomerMainPage
                             customerData={this.state.customerData}
                             ownOrders={this.state.ownOrders}
