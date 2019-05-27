@@ -7,7 +7,16 @@ $fa-font-path: "../../node_modules/@fortawesome/fontawesome-free/webfonts/";
 @import "../../node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
 @import "../../node_modules/@fortawesome/fontawesome-free/scss/brands.scss";
 
+body {
+    background-color: aliceblue;
+}
+
 #shutterGutterApp {
+    background-color: aliceblue;
+
+    hr {
+        border-color: lightgrey;
+    }
 
     .header-icon {
         font-size: 0.7em;
@@ -54,10 +63,10 @@ $fa-font-path: "../../node_modules/@fortawesome/fontawesome-free/webfonts/";
         margin-right: 5px;
     }
 
-   .fa-hard-hat {
+    .fa-hard-hat {
         color: #ecab14;
         margin-right: 5px;
-   }
+    }
 
     .fa-user-tie {
         color: black;
@@ -67,16 +76,20 @@ $fa-font-path: "../../node_modules/@fortawesome/fontawesome-free/webfonts/";
     .invoice-form {
         border: 1px solid lightblue;
         padding: 10px 10px 0px 10px;
-        border-radius: 10px;
         background-color: aliceblue;
+        box-shadow: 5px 5px 5px lightblue;
     }
 
     .margin-top-30 {
         margin-top: 30px;
     }
     
-    #my-navbar .active-nav-link {
-        color: #337ab7;
+    #my-navbar {
+        border-radius: 0;
+
+        .active-nav-link {
+            color: #337ab7;
+        }
     }
     
     .my-tr-row td {
@@ -90,6 +103,10 @@ $fa-font-path: "../../node_modules/@fortawesome/fontawesome-free/webfonts/";
     .no-top-border {
         border-top: none;
     }
+
+    .margin-bottom-10 {
+        margin-bottom: 10px;
+    }
     
     .comment-field {
         overflow-y: scroll;
@@ -98,5 +115,9 @@ $fa-font-path: "../../node_modules/@fortawesome/fontawesome-free/webfonts/";
         padding: 10px;
         border-radius: 5px;
         border: 1px solid grey;
+    }
+
+    .shadowed {
+        box-shadow: 0 0px 5px lightgrey;
     }
 }

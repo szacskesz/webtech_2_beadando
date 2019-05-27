@@ -10,7 +10,7 @@ class App extends Component {
       <div id="shutterGutterApp">
         <HashRouter>
           <div>
-            <nav className="navbar navbar-default" id="my-navbar">
+            <nav className="navbar navbar-default shadowed" id="my-navbar">
               <div className="container-fluid">
                 <div className="navbar-header">
                   <div className="navbar-brand">ShutterGlutter</div>

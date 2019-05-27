@@ -181,7 +181,7 @@ export class WorkerPage extends Component {
                                                                         isSelectedShutter &&
                                                                         <tr>
                                                                             <td colSpan={6} className="no-top-border">
-                                                                                <div className="col-sm-offset-1 col-sm-11">
+                                                                                <div className="col-sm-offset-1 col-sm-11 shadowed margin-bottom-10">
                                                                                     <div>
                                                                                         <h3>Parts:</h3>
                                                                                     </div>
@@ -211,8 +211,8 @@ export class WorkerPage extends Component {
                                                                                             <button 
                                                                                                 type="button" 
                                                                                                 className={this.state.isAllOrdersFetching
-                                                                                                    ? 'btn btn-primary btn-block disabled'
-                                                                                                    : 'btn btn-primary btn-block'
+                                                                                                    ? 'btn btn-primary margin-bottom-10 btn-block disabled'
+                                                                                                    : 'btn btn-primary margin-bottom-10 btn-block'
                                                                                                 }
                                                                                                 onClick={() => {
                                                                                                     if (!this.state.isAllOrdersFetching) {
