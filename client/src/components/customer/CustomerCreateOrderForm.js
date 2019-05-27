@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ShutterDataStore from "./../../stores/ShutterDataStore"
 import ShutterDataActions from "./../../actions/ShutterDataActions"
+import OrderActions from "./../../actions/OrderActions"
 
 export class CustomerCreateOrderForm extends Component {
 
@@ -11,6 +12,9 @@ export class CustomerCreateOrderForm extends Component {
             shutterColors: ShutterDataStore._shutterColors,
             shutterTypes: ShutterDataStore._shutterTypes,
             shutterMaterials: ShutterDataStore._shutterMaterials,
+            isShutterColorsFetching: ShutterDataStore._isShutterColorsFetching,
+            isShutterTypesFetching: ShutterDataStore._isShutterTypesFetching,
+            isShutterMaterialsFetching: ShutterDataStore._isShutterMaterialsFetching,
             order: {
                 comment: "",
                 windows: []
@@ -25,15 +29,24 @@ export class CustomerCreateOrderForm extends Component {
     }
 
     onShutterColorsChange = () => {
-        this.setState({shutterColors : ShutterDataStore._shutterColors});
+        this.setState({
+            shutterColors : ShutterDataStore._shutterColors,
+            isShutterColorsFetching: ShutterDataStore._isShutterColorsFetching
+        });
     }
 
     onShutterTypesChange = () => {
-        this.setState({shutterTypes : ShutterDataStore._shutterTypes});
+        this.setState({
+            shutterTypes : ShutterDataStore._shutterTypes,
+            isShutterTypesFetching: ShutterDataStore._isShutterTypesFetching
+        });
     }
 
     onShutterMaterialsChange = () => {
-        this.setState({shutterMaterials : ShutterDataStore._shutterMaterials});
+        this.setState({
+            shutterMaterials : ShutterDataStore._shutterMaterials,
+            isShutterMaterialsFetching: ShutterDataStore._isShutterMaterialsFetching
+        });
     }
 
     componentDidMount() {
@@ -429,26 +442,43 @@ export class CustomerCreateOrderForm extends Component {
     saveForm = (event) => {
         event.preventDefault();
         if(this.validateForm()) {
-            this.props.createOrderCallback(this.state.order);
-            this.setState({
-                order: {
-                    comment: "",
-                    windows: []
-                },
-                error: {
-                    windowsSize: undefined,
-                    order: {
-                        windows: []
-                    }
+            const order = this.state.order;
+            let parsedWindows = [...order.windows];
+            for (let i = 0; i < parsedWindows.length; i++) {
+                parsedWindows[i].width = parseInt(parsedWindows[i].width);
+                parsedWindows[i].height = parseInt(parsedWindows[i].height);
+                parsedWindows[i].shutter = {
+                    ...parsedWindows[i].shutter,
+                    isFinished: false
                 }
-            })
+            }
+    
+            const orderToCreate = {
+                ...order,
+                isInstalled: false,
+                customerData: this.props.customerData,
+                windows: parsedWindows
+            }
+    
+            OrderActions.createOrder(orderToCreate, () => {
+                this.setState({
+                    order: {
+                        comment: "",
+                        windows: []
+                    },
+                    error: {
+                        windowsSize: undefined,
+                        order: {
+                            windows: []
+                        }
+                    }
+                })
+            });
         }
     }
 
-
     render() {
         return (
-
             <form  onSubmit={(e) => this.saveForm(e)}>
                 <h2>Create order</h2>
                 <div>
@@ -653,7 +683,13 @@ export class CustomerCreateOrderForm extends Component {
                 </div>
 
                 <div className="form-group"> 
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <button
+                        type={this.props.isOwnOrdersFetching ? 'button' : 'submit'}
+                        className={this.props.isOwnOrdersFetching ? 'btn btn-primary disabled' : 'btn btn-primary'}
+                        disabled={this.props.isOwnOrdersFetching}
+                    >
+                        Submit
+                    </button>
                 </div>
             </form>
         )

@@ -2,7 +2,9 @@ import EventEmitter from 'events'
 
 class OrderStore extends EventEmitter{
     _allOrders = [];
-    _isAllOrdersFecthed = false;
+
+    _isAllOrdersFetching = false;
+    _isAllOrdersFetched = false;
 
     emitAllOrdersChange() {
         this.emit('all-orders-change');

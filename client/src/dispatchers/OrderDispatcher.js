@@ -21,8 +21,13 @@ dispatcher.register((data) => {
         return;
     }
 
+    CostumerDataStore._isOwnOrdersFetching = true;
+    CostumerDataStore.emitOwnOrdersChange();
+    OrderStore._isAllOrdersFetching = true;
+    OrderStore.emitAllOrdersChange();
+
     axios.post("/order/createOrder", {
-        "order": data.action.payload
+        "order": data.action.payload.order
     })
     .then((response) => {
         
@@ -32,10 +37,25 @@ dispatcher.register((data) => {
         })
         .then((response) => {
             CostumerDataStore._ownOrders = [...CostumerDataStore._ownOrders, response.data.order];
-            CostumerDataStore.emitOwnOrdersChange();
             OrderStore._allOrders = [...OrderStore._allOrders, response.data.order];
-            OrderStore.emitAllOrdersChange();
         })
+        .catch((error) => {
+            alert(error);
+        })
+        .finally(() => {
+            CostumerDataStore._isOwnOrdersFetching = false;
+            CostumerDataStore.emitOwnOrdersChange();
+            OrderStore._isAllOrdersFetching = false;
+            OrderStore.emitAllOrdersChange();
+            data.action.payload.successCallback();
+        })
+    })
+    .catch((error) => {
+        alert(error);
+        CostumerDataStore._isOwnOrdersFetching = false;
+        CostumerDataStore.emitOwnOrdersChange();
+        OrderStore._isAllOrdersFetching = false;
+        OrderStore.emitAllOrdersChange();
     })
 
 });
@@ -45,10 +65,19 @@ dispatcher.register((data) => {
         return;
     }
 
+    OrderStore._isAllOrdersFetching = true;
+    OrderStore.emitAllOrdersChange();
+
     axios.get("/order/getAllOrders")
     .then((response) => {
         OrderStore._allOrders = response.data.orders;
-        OrderStore._isAllOrdersFecthed = true;
+        OrderStore._isAllOrdersFetched = true;
+    })
+    .catch((error) => {
+        alert(error);
+    })
+    .finally(() => {
+        OrderStore._isAllOrdersFetching = false;
         OrderStore.emitAllOrdersChange();
     })
 });
@@ -57,6 +86,11 @@ dispatcher.register((data) => {
     if(data.action.actionType !== OrderConstants.FINISH_SHUTTER){
         return;
     }
+
+    CostumerDataStore._isOwnOrdersFetching = true;
+    CostumerDataStore.emitOwnOrdersChange();
+    OrderStore._isAllOrdersFetching = true;
+    OrderStore.emitAllOrdersChange();
 
     axios.post("/order/finishShutter", {
         "orderId": data.action.payload.orderId,
@@ -75,7 +109,6 @@ dispatcher.register((data) => {
         })
 
         OrderStore._allOrders = allOrders;
-        OrderStore.emitAllOrdersChange();
 
         let ownOrders = [...CostumerDataStore._ownOrders];
         ownOrders.forEach((order) => {
@@ -89,7 +122,15 @@ dispatcher.register((data) => {
         })
 
         CostumerDataStore._ownOrders = ownOrders;
+    })
+    .catch((error) => {
+        alert(error);
+    })
+    .finally(() => {
+        CostumerDataStore._isOwnOrdersFetching = false;
         CostumerDataStore.emitOwnOrdersChange();
+        OrderStore._isAllOrdersFetching = false;
+        OrderStore.emitAllOrdersChange();
     })
 });
 
@@ -97,6 +138,11 @@ dispatcher.register((data) => {
     if(data.action.actionType !== OrderConstants.FINISH_INSTALLATION){
         return;
     }
+
+    CostumerDataStore._isOwnOrdersFetching = true;
+    CostumerDataStore.emitOwnOrdersChange();
+    OrderStore._isAllOrdersFetching = true;
+    OrderStore.emitAllOrdersChange();
 
     axios.post("/order/finishInstallation", {
         "orderId": data.action.payload
@@ -110,7 +156,6 @@ dispatcher.register((data) => {
         })
 
         OrderStore._allOrders = allOrders;
-        OrderStore.emitAllOrdersChange();
 
         let ownOrders = [...CostumerDataStore._ownOrders];
         ownOrders.forEach((order) => {
@@ -120,7 +165,15 @@ dispatcher.register((data) => {
         })
 
         CostumerDataStore._ownOrders = ownOrders;
+    })
+    .catch((error) => {
+        alert(error);
+    })
+    .finally(() => {
+        CostumerDataStore._isOwnOrdersFetching = false;
         CostumerDataStore.emitOwnOrdersChange();
+        OrderStore._isAllOrdersFetching = false;
+        OrderStore.emitAllOrdersChange();
     })
 });
 
@@ -128,6 +181,11 @@ dispatcher.register((data) => {
     if(data.action.actionType !== OrderConstants.CREATE_INVOICE_FOR_ORDER){
         return;
     }
+
+    CostumerDataStore._isOwnOrdersFetching = true;
+    CostumerDataStore.emitOwnOrdersChange();
+    OrderStore._isAllOrdersFetching = true;
+    OrderStore.emitAllOrdersChange();
 
     axios.post("/order/createInvoiceForOrder", {
         "orderId": data.action.payload.orderId,
@@ -142,7 +200,6 @@ dispatcher.register((data) => {
         })
 
         OrderStore._allOrders = allOrders;
-        OrderStore.emitAllOrdersChange();
 
         let ownOrders = [...CostumerDataStore._ownOrders];
         ownOrders.forEach((order) => {
@@ -152,7 +209,15 @@ dispatcher.register((data) => {
         })
 
         CostumerDataStore._ownOrders = ownOrders;
+    })
+    .catch((error) => {
+        alert(error);
+    })
+    .finally(() => {
+        CostumerDataStore._isOwnOrdersFetching = false;
         CostumerDataStore.emitOwnOrdersChange();
+        OrderStore._isAllOrdersFetching = false;
+        OrderStore.emitAllOrdersChange();
     })
 });
 

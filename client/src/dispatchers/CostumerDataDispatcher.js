@@ -20,12 +20,21 @@ dispatcher.register((data) => {
         return;
     }
 
+    CostumerDataStore._isOwnOrdersFetching = true;
+    CostumerDataStore.emitOwnOrdersChange();
+
     axios.post("/order/getAllOrdersByEmail", {
         "email": data.action.payload.email
     })
     .then((response) => {
         CostumerDataStore._costumerData = data.action.payload;
         CostumerDataStore._ownOrders = response.data.orders;
+    })
+    .catch((error) => {
+        alert(error);
+    })
+    .finally(() => {
+        CostumerDataStore._isOwnOrdersFetching = false;
         CostumerDataStore.emitCostumerDataChange();
         CostumerDataStore.emitOwnOrdersChange();
     })
@@ -47,11 +56,20 @@ dispatcher.register((data) => {
         return;
     }
 
+    CostumerDataStore._isOwnOrdersFetching = true;
+    CostumerDataStore.emitOwnOrdersChange();
+
     axios.post("/order/getAllOrdersByEmail", {
         "email": CostumerDataStore._costumerData.email
     })
     .then((response) => {
         CostumerDataStore._ownOrders = response.data.orders;
+    })
+    .catch((error) => {
+        alert(error);
+    })
+    .finally(() => {
+        CostumerDataStore._isOwnOrdersFetching = false;
         CostumerDataStore.emitOwnOrdersChange();
     })
 });

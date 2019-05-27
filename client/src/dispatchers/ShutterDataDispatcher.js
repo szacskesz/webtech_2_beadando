@@ -20,9 +20,18 @@ dispatcher.register((data) => {
         return;
     }
 
+    ShutterDataStore._isShutterColorsFetching = true;
+    ShutterDataStore.emitShutterColorsChange()
+
     axios.get("/shutter-data/getAllShutterColors")
     .then((response) => {
         ShutterDataStore._shutterColors = response.data.colors;
+    })
+    .catch((error) => {
+        alert(error);
+    })
+    .finally(() => {
+        ShutterDataStore._isShutterColorsFetching = false;
         ShutterDataStore.emitShutterColorsChange()
     })
 });
@@ -32,9 +41,18 @@ dispatcher.register((data) => {
         return;
     }
 
+    ShutterDataStore._isShutterTypesFetching = true;
+    ShutterDataStore.emitShutterTypesChange();
+
     axios.get("/shutter-data/getAllShutterTypes")
     .then((response) => {
-        ShutterDataStore._shutterTypes = response.data.types;
+        ShutterDataStore._shutterTypes = response.data.types;  
+    })
+    .catch((error) => {
+        alert(error);
+    })
+    .finally(() => {
+        ShutterDataStore._isShutterTypesFetching = false;
         ShutterDataStore.emitShutterTypesChange()
     })
 });
@@ -44,10 +62,19 @@ dispatcher.register((data) => {
         return;
     }
 
+    ShutterDataStore._isShutterMaterialsFetching = true;
+    ShutterDataStore.emitShutterMaterialsChange();
+
     axios.get("/shutter-data/getAllShutterMaterials")
     .then((response) => {
         ShutterDataStore._shutterMaterials = response.data.materials;
-        ShutterDataStore.emitShutterMaterialsChange()
+    })
+    .catch((error) => {
+        alert(error);
+    })
+    .finally(() => {
+        ShutterDataStore._isShutterMaterialsFetching = false;
+        ShutterDataStore.emitShutterMaterialsChange();
     })
 });
 

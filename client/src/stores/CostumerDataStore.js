@@ -4,7 +4,9 @@ class CostumerDataStore extends EventEmitter{
     _costumerData = undefined;
     _ownOrders = [];
 
-    emitCostumerDataChange(){
+    _isOwnOrdersFetching = false;
+
+    emitCostumerDataChange() {
         this.emit('costumer-data-change');
     }
 
